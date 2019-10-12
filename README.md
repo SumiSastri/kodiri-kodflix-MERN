@@ -1,26 +1,163 @@
 # Kodiri-Kodflix-MERN
+Table of Contents
 
-This is part -2 of the challenge where the front-end remains untouched and data is moved to the back-end.
+- Learing objectives
+- What is the front-end
+- What is the back-end
+- How do the front-end and backe-end communicate?
+- What is JSON
+- What is Ajax & async JavaScript
+- What is the JavaScript Event Loop
+- ES-6 Promises vs. CallBacks
+- ES-8 Async Await
+- API's REST vs. SOAP
 
 ## Learning Objectives
+Client-server request-response cycle - connecting the backend to the frontend.
 
-Setting up and running a backend data-base removing data from the browser and front-end files to the backend. Understanding the difference between each of the backend moving parts - Node, Express and MongoDB.
+#### What is the front-end?
 
-#### How the internet works
-
-It is useful to see the relationship between the backend and front-end by looking at how the internet works - MDN documentation[https://developer.mozilla.org/en-US/docs/Learn/Common_questions/How_does_the_Internet_work] and a good YouTube Video:  [https://www.youtube.com/watch?v=7_LPdttKXPc]
+The front end (client side) is based on three key languages - HTML (hyper-text-markup-language), CSS (Cascading Style Sheets) and JavaScript. JavaScript is a browser-based language that needs its host - HTML to operate its code blocks(algorithms).
 
 #### What is the backend?
 
-Front-end refers to the user-interface and user-experience of an application on a client-device - phone, tablet, computer screen, wrist watch...
+Today front-end browsers are in many client devices - phone, tablet, computer screen, wrist watch. It mainly refers to the user interface with a web/mobile application.
 
-Backend refers to the data, logic that the user does not see and that is on a physical or cloud-based server, in databases and other remote (as in non-client-side devices) devices.
+Backend refers to the data, logic that the user does not see. This data is stored on non-client side devices - the cloud, physical servers and other remote devices that are not linked to front-end client-side devices (phones, tablets, computers, wristwatches, etc.)
 
-Separation of concerns - front-end light data that runs no risks of security breaches can be stored on the browser-side - cookies/ authentication codes, etc. are fine but not personal details of users, IP-protected code-bases, etc., which are stored securely in servers or local storage in the backend.
+In the front end data that have limited security risks are stored -  cookies/ authentication codes, etc. User data -  personal details of users, IP-protected code-bases, etc., are stored securely in non-client devices like servers or local storage in the backend. When there is data that needs to be stored securely and when there are CPU-heavy data (videos, image-manipulation, etc.) is better stored on the backend.
 
-When there is data that needs to be stored securely and when there are CPU-heavy data (videos, image-manipulation, etc.) is better stored on the backend.
+#### How do the front-end and back-end communicate? Client-Server API communication
 
-For the backend data and services to connect to the front-end application programming interfaces (API) are needed.
+HTTP (hyper-text-transfer-protocol) is the protocol, standards or rules that connect the front-end(client-side) to the back-end (server-side).  HTTPS (hyper-text-transfer-protocol-secure) - encrypts the client-service request-response for enhanced security. This is done via an encryptation layer using SSL (secure sockets layer) or TLS (Transport Layer Security)
+
+HTTP & HTTPS enable documents to be transported to and from browsers and back-end databases. It is the basis of data-exchange on the web. The browser (client) sends a request to the server (where documents are hosted) and the server sends a response. The request-response pattern (which is based on  a set of rules, standards or protocols) is the language of communicaton between client (browser, front-end) and server (back-end, databases). 
+
+*  How do REQUESTS work?
+- Via methods - GET, POST, PUT, DELETE.
+GET - get documents and files from the server
+POST - Post the data from the browser to the database in the server
+PUT - Update the data from the browser with the new information in the server
+DELETE - Delete the information sent from the browser in the database
+
+- Via query-strings - after the URL with a question mark, there are query string parameters in key-value pairs
+
+- Via the body of the request - you can see the request headers are encoded in the headers tab in network but you can still see all the data in the body of the request in the browser
+
+- Via encrypted - HTTPS requests - only client-server share information in a secure way
+
+* How do RESPONSES work
+
+- Debugging 
+To see this request-response pattern in the console, you can go to the "Network" tab.
+- GO TO Server Status
+The response that the server sends back is the HTTP server status messages 
+Documentation [https://www.w3schools.com/tags/ref_httpmessages.asp]
+100 series - information [ 100 continue - server has received headers, send the request body, 101 request to switch protocols from requester, 103 resume aborted PUT or POST requests]
+200 series - success messages [ 200 successful response, 201 new resource created, 202, request accepted for processing - processing not completed]
+300 series - redirects [307 temporary redirect, 301 moved permanently]
+400 series - client errors messages from browser (404 not found, 403 forbidden, 401 unathorised)
+500 series - server errors messages from servers [500 internal server error, 502 bad gateway, 504 gateway timeout]
+
+- GO TO  Headers
+ - request url
+ - request method
+ - server status dode
+ - remote (IP) address
+ - response headers - content type
+ - request headers 
+
+- GO TO Response  - you can see the document type and the body of the request sent in HTTP this is open and visible to anyone who looks at the network tab, therefore sensitive information now is only sent via HTTPS requests
+
+* More resources:
+
+MDN documentation[https://developer.mozilla.org/en-US/docs/Learn/Common_questions/How_does_the_Internet_work] 
+A good YouTube Video:  [https://www.youtube.com/watch?v=7_LPdttKXPc]
+
+The backend (server side) depends on API's to run HTTP requests from databases that are written in a plurality of languages (PHP, Scala, Go-Lang, Python). Client requests are with three key languages - HTML,CSS and JavaScript. For these languages to be understood by the front-end (client-side). 
+
+The process of converting the data in javascript from a backend database in a language that is not javascript is done through JSON - javascript object notation.
+
+#### What is JSON?
+
+JSON is a lightweight store of data into text so that HTTP calls can be made, parsed (interpreted) by browsers and sent back to databases. As it is a text-based format it is lightweight.  It is then  reconverted back into the format that the database requires. It therefore stores and transports data quickly and efficiently. Compared to XML parsing, JSON is less verbose. JSON uses less data overall so reduces cost and increases parsing speed. 
+
+The way that JavaScript is converted into JSON is to intatiate a JavaScript object to a variable. This object is then assigned to the method  ```JSON.parse()```. The method, parses the JavaScript object and convert this JavaScript Object (front-end, client-side language) into Java Script Obect Notation(JSON). The converted object to JSON is sent server-side: Note the syntax to convert a JS object into JSON-
+
+```const objectName = JSON.parse ('{"name":Kodflix", "description":"some description"})'```
+
+The backend now gets a JSON request. JSON is read and the response method used in the back-end code should convert the body of the response first into text then into JSON response with the  ```JSON.stringify()``` method. The backend data is converted into text and intatiated to a variable that is the new response payload (data) which is text that needs to be converted back into JSON. JSON is then 
+
+```const convertToJSON = JSON.stringify({name: 'Kodflix', id: 1})```
+
+Note the JSON vs JavaScript object syntax. JavaScript the name value pair, only if the value is a string is it in quotes, however with JSON both the name and value are in strings. JSON objects both the name and value pair are enclosed in quotes, to denote both are strings. 
+
+However, there are also similarties -  curly-braces hold the values of an object, square-braces hold the values of arrays.
+
+To visualise JSON better - add the Chrome Extension JSONView
+
+Edureka has a good video worth watching[https://www.youtube.com/watch?v=uw_rP5bV9r0] for a more detailed understanding.
+
+ #### What is the JavaScript event-loop?
+ 
+ Node and express provide an event-driven architecture for apps and projects. An event is a series of occurences driven by changes on the frontend. Events build up in the task queue and are executed by parsers (both in the front-end and back-end).
+
+ As javascript is a single-threaded non-blocking code base, it is able to deal with multiple tasks on the task queue driven by events.
+
+ For more detail on the event-loop, MDN documentation [https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop]
+
+### What is Ajax and async JavaScript?
+
+Ajax was created by google to allow you to make a get request (client-side) which is sent to back-end servers. The server sends back a response but instead of loading everything at the same time, a code block is run on load, and assigns only those elements that need to be re-rendered) without reloading the page whole page while data (or the payload) is sent in the background.  It is a combination of tools and is mainly accessed via the global ```fetch```method in browsers.
+
+React does not have its own in-built AJAX library.
+
+Most server-side code is parsed synchronously - which means each thread executes one function before going on to the next. JavaScript uses a single thread asynchronously to handle several front end requests at the same time.
+
+These requests are sent as an event queue to the server side. JavaScript methods such as call back functions, promises, etc, allows the front-end call stack (requests in an event-queue) to handle all these requests and return in the response from the server side back to the client the elements that can be rendered quickly first while others that need more time to send the data later.
+
+ Async javascript is used extensively in connecting the backend to front-end user interfaces and forms and important part in joining up the stack. It is specifically used for single-page-applications.
+
+Some other async methods are ```setState({]})``` event handlers ```onClick.()``` and ```setTimeOUt.()``` are some other examples.
+
+For more on async javascript, callbacks, promises and recursion checkout Gray's Kodiri videos [https://www.youtube.com/watch?v=pX74__nD48I] [https://www.youtube.com/watch?v=F5XD1JNhkP8] [https://www.youtube.com/watch?v=PlhmNNNyYyogit]
+
+#### ES-6 call-backs vs. Promises
+
+A call back is executed when one function calls another function. Map, filter and reduce are call-back functions. There is a synchronous nested functionality where one code block has to run before the other can be executed and can lead to what was known as "call-back-hell" or "the pyramid-of-doom". It was also dependent on several conditional statements
+
+Promises serve the same purpose as call-backs were created in ES-6 to solve the call-back-hell problem with using the constructor method  that takes two params - resolve and reject - the promise gets executed with a series of .then blocks that results in the promise ending with three states:-
+- Fulfilled
+- Rejected
+- Pending
+
+#### ES-8 Async Await
+
+Async await is built on top of promises - it makes promises look like synchronous code. As JavaScript is now used both in the back-end and front-end, it helps server-side and client-side developers understand the code base. There are two key words ```async``` and ```await``` it is syntactic sugar over promises. 
+
+
+#### What is a REpresentational State Transfer vs. SOAP?
+
+This cycle of calling, posting, updating and deleting data during the client-server request-response cyle is also called the CRUD cycle - Create, Read, Update, Delete. 
+
+API's call the data from the database, posts this data on the web-page, updates the data that it receives from the front-end, sends it back to the backend and saves it or if it is not needed the data is deleted. 
+
+
+The methods represent the current state of the object - that is where the name Representational State Transfer (REST) gets it's name and in what state (or payload/ data)  it is in during transit from client to server.
+
+It is therefore an architectural style for communicating between client-server. It is a state-less model as the payloads are merely a representation of state at calltime.
+
+Restful-React - As React defines itself as a front-end library, it allows users to figure out what works best for the app - this provides building blocks and flexiblity it also means that there are no protocols to follow, it does not prescribe how REST API's should be created.
+
+Read More on API's and MVC [https://www.codecademy.com/articles/what-is-rest] [https://www.codecademy.com/articles/mvc]
+
+### What is the MEAN-MERN stack?
+
+A stack is a collection of technologies used to run an app. The MEAN stack and MERN stack are an end-to-end javascript collection of technologies used to build apps using the Mongo database and mongoose.js/ express.js as a runner,  angular.js or react.js for the front-end ui-ux and node.js to connect the Mongo database to the front-end libraries.
+
+The MEAN/MERN stack are a network of applications based on javascript that communicate through the network front-end - midware - backend fluidly. It is often a preferred option for start-ups as fewer language specialisations are required in the dev team.
+
+* The advantages of MEAN/ MERN- (Mongo-Express-Angular (or React)-Node) stack with javascript read: [https://www.toptal.com/javascript/guide-to-full-stack-javascript-initjs] The stack has a robust architecture for small apps, and comes inbuilt with Jestfor  unit testing, if you are using React. The article suggests using gulp for automated build tasks and brackets for full text coding. Server side componentization often done with Docker can be achieved with express.js or connect.js.
 
 #### What is node.js?
 
@@ -74,13 +211,13 @@ Reading-list:
 [https://jilles.me/express-routing-the-beginners-guide/]
 [https://expressjs.com/en/guide/routing.html]
 
- #### What is the JavaScript event-loop?
- 
- Node and express provide an event-driven architecture for apps and projects. An event is a series of occurences driven by changes on the frontend. Events build up in the task queue and are executed by parsers (both in the front-end and back-end).
 
- As javascript is a single-threaded non-blocking code base, it is able to deal with multiple tasks on the task queue driven by events.
+#### What is Axios and Superagent?
+The two most popular options for making AJAX request with React are Fetch and Axios. As React does not have Ajax to use promises in React you need to install axios [npm install axios]
 
- For more detail on the event-loop, MDN documentation [https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop]
+Axios is like Ajax and you can use ES-6 promises with Axios in React.
+
+SuperAgent does not have promises baked-into the library
 
 #### Backend package managers - Node vs. Yarn
 
@@ -113,53 +250,6 @@ Nodemon hot loads the back end server so you do not need to run commands such as
 
 Check in your package-JSON for the install and read documentation [https://github.com/remy/nodemon] which helps bug fixing if you encounter challenges hot-loading.
 
-### What is async JavaScript?
-
-Most non-JavaScript code is parsed synchronously - which means each thread executes one function before going on to the next.
-
- Async javascript is used extensively in connecting the backend to front-end user interfaces and forms and important part in joining up the stack. Data from any source can be transpiled into JavaScript.
-
- With call back functions, promises, passing by reference and other methods that can be written into javascript, allows the front-end call stack to operate with a single thread, and multiple calls to the stack in the task queue. 
-
-Some other async methods are ```setState({]})``` event handlers ```onClick.()``` and ```setTimeOUt.()``` are some other examples.
-
-For more on async javascript, callbacks, promises and recursion checkout Gray's Kodiri videos [https://www.youtube.com/watch?v=pX74__nD48I] [https://www.youtube.com/watch?v=F5XD1JNhkP8] [https://www.youtube.com/watch?v=PlhmNNNyYyogit]
-
-#### What is a REpresentational State Transfer or a REST-ful API?
-
-The backend depends on API's to run HTTP (hyper-text-transfer-protocol) requests from backend databases that are written in a plurality of languages that may not be text-based. As rendering on the front end is on HTML (hyper-text-markup-language) data from the backend needs to be converted into text and then rendered on the page.
-
-API's call the data from the database, posts this data on the web-page, updates the data that it receives from the front-end, sends it back to the backend and saves it or if it is not needed the data is deleted. This cycle of calling, posting, updating and deleting data is also called the CRUD cycle - Create, Read, Update, Delete. 
-
-The methods are are GET, PUT, POST, UPDATE, DELETE - represent the current state of the object - that is where the name Representational State Transfer (REST) gets it's name and in what state (or payload/ data)  it is in during transit from client to server.
-
-It is therefore an architectural style for communicating between client-server. It is a state-less model as the payloads are merely a representation of state at calltime.
-
-The process of converting the data in javascript from a backend database in a language that is not javascript is done through JSON - javascript object notation.
-
-Restful-React - As React defines itself as a front-end library, it allows users to figure out what works best for the app - this provides building blocks and flexiblity it also means that there are no protocols to follow, it does not prescribe how REST API's should be created.
-
-Read More on API's and MVC [https://www.codecademy.com/articles/what-is-rest] [https://www.codecademy.com/articles/mvc]
-
-#### What is JSON?
-
-JSON is a lightweight store of data into text so that HTTP calls can be made, parsed (interpreted) by browsers and sent back to databases. As it is a text-based format it is lightweight.  It is then  reconverted back into the format that the database requires. It therefore stores and transports data quickly and efficiently.
-
-Compared to XML parsing, JSON is less verbose. JSON uses less data overall so reduces cost and increases parsing speed. 
-
-The main task of JSON is to convert and object into text for client-server communcations.
-
-Simple methods like ```JSON.parse()``` and ```JSON.stringify()``` have syntax that are easy to understand, for example, curly-braces hold the values of an object, square-braces hold the values of arrays.
-
-There are also differences -  JSON objects both the name and value pair are enclosed in quotes, to denote both are strings. Edureka has a good video worth watching[https://www.youtube.com/watch?v=uw_rP5bV9r0] for a more detailed understanding.
-
-### What is the MEAN-MERN stack?
-
-A stack is a collection of technologies used to run an app. The MEAN stack and MERN stack are an end-to-end javascript collection of technologies used to build apps using the Mongo database and mongoose.js/ express.js as a runner,  angular.js or react.js for the front-end ui-ux and node.js to connect the Mongo database to the front-end libraries.
-
-The MEAN/MERN stack are a network of applications based on javascript that communicate through the network front-end - midware - backend fluidly. It is often a preferred option for start-ups as fewer language specialisations are required in the dev team.
-
-* The advantages of MEAN/ MERN- (Mongo-Express-Angular (or React)-Node) stack with javascript read: [https://www.toptal.com/javascript/guide-to-full-stack-javascript-initjs] The stack has a robust architecture for small apps, and comes inbuilt with Jestfor  unit testing, if you are using React. The article suggests using gulp for automated build tasks and brackets for full text coding. Server side componentization often done with Docker can be achieved with express.js or connect.js.
 
 
 ### How to guide to connect the front-end react app to the node-express environment
