@@ -1,4 +1,4 @@
-module.exports = function filmsData() {
+module.exports = function getFilmData() {
 	return [
 		{
 			id: 'the-wave-film',

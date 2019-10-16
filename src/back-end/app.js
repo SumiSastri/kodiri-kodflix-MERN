@@ -3,8 +3,8 @@ const app = express();
 const port = process.env.PORT || 3001;
 const path = require('path');
 
-const films = require('./api-filmsData');
-app.get('./api-filmsData/filmsData', (req, res) => res.send(films.filmsData));
+const getFilmData = require('./api-filmsData');
+app.get('/api/films-data', (req, res) => res.send(getFilmData()));
 
 app.use(express.static(path.join(__dirname, '../../build')));
 app.get('*', function(req, res) {

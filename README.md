@@ -124,28 +124,42 @@ For more on async javascript, callbacks, promises and recursion checkout Gray's 
 
 #### ES-6 call-backs vs. Promises
 
-A call back is executed when one function calls another function. Map, filter and reduce are call-back functions. There is a synchronous nested functionality where one code block has to run before the other can be executed and can lead to what was known as "call-back-hell" or "the pyramid-of-doom". It was also dependent on several conditional statements
+A call back is executed when one function calls another function. Map,filter and reduce are call-back functions. There is a synchronous nested functionality where one code block has to run before the other can be executed and can lead to what was known as "call-back-hell" or "the pyramid-of-doom". It was also dependent on several conditional statements
 
 Promises serve the same purpose as call-backs were created in ES-6 to solve the call-back-hell problem with using the constructor method  that takes two params - resolve and reject - the promise gets executed with a series of .then blocks that results in the promise ending with three states:-
 - Fulfilled
 - Rejected
 - Pending
 
+Promises take 2 arguments ```return new Promise (resolve, reject)``` followed by```.then()``` blocks
+
 #### ES-8 Async Await
 
 Async await is built on top of promises - it makes promises look like synchronous code. As JavaScript is now used both in the back-end and front-end, it helps server-side and client-side developers understand the code base. There are two key words ```async``` and ```await``` it is syntactic sugar over promises. 
 
+#### SOAP vs. REST?
 
-#### What is a REpresentational State Transfer vs. SOAP?
-
-This cycle of calling, posting, updating and deleting data during the client-server request-response cyle is also called the CRUD cycle - Create, Read, Update, Delete. 
+SOAP is an acryonym for Simple Object Access Protocol while REST is an acryonynm for Representational State Transfer (REST). Both are Application Protocol Interfaces that enter into the cycle of calling, posting, updating and deleting data during the client-server request-response cyle is also called the CRUD cycle - Create, Read, Update, Delete. 
 
 API's call the data from the database, posts this data on the web-page, updates the data that it receives from the front-end, sends it back to the backend and saves it or if it is not needed the data is deleted. 
 
+SOAP, initially created by Microsoft, is a more rigid way of accessing databases. SOAP relies on XML calls while REST on JSON. SOAP works better with legacy systems such as the Distributed Component Object Model (DCOM) and Common Object Request Broker Architecture (CORBA).
 
-The methods represent the current state of the object - that is where the name Representational State Transfer (REST) gets it's name and in what state (or payload/ data)  it is in during transit from client to server.
+SOAP is a more rigid system that is intolerant of errors. However, SOAP processes can be automated and can be used with STMP (simple mail transfer protocol) as well as HTTP, which means data can be transfered not just to the web but via electronic mail systems.
+
+REST is light-weight becuase of JSON and JavaScript developers prefer REST to SOAP as a significant amount of code needs ot be written to transform XML data.
+
+In the CRUD cycle, REST has only four easy to memorise methods that describe everything that the API call does - get, post, put and delete.
+
+The methods represent the current state of the object - that is where the name Representational State Transfer (REST) gets it's name and in what state (or payload/data) it is in during transit from client to server.
 
 It is therefore an architectural style for communicating between client-server. It is a state-less model as the payloads are merely a representation of state at calltime.
+
+There is no choice between using SOAP or REST as it is already pre-defined as an architectural service and you have to use the system that the API creator requires.
+
+Some sites, like Amazon, support both.
+
+A good blog to read [https://smartbear.com/blog/test-and-monitor/understanding-soap-and-rest-basics/] and a little more technical version [https://www.soapui.org/learn/api/soap-vs-rest-api.html]
 
 Restful-React - As React defines itself as a front-end library, it allows users to figure out what works best for the app - this provides building blocks and flexiblity it also means that there are no protocols to follow, it does not prescribe how REST API's should be created.
 
@@ -228,8 +242,10 @@ Both are open source registries for software libraries for node.js, yarn is owne
 They are different from operating system package managers, such as Brew. Brew also installs, updates, configures and removes software but in a local environment (OS).
 
 - Which one?
+- My preference is npm - after using yarn as it is signifcantly faster, updates to yarn cause conflicts in installation. I had a lot of problems and have globally uninstalled yarn
+
 Yarn takes up a lot of disk space, but is faster, manages licences better however, the disc usage space vs efficiency npm considered the better option
-- npm is a better package to manage dependencies as sends usage details back to Facebook
+- npm is a better package to manage dependencies as sends usage details back to Facebook - yarn official stance is that this is not accurate information
 - npm is written all in lower case node package manager installation is sequentially
 - yarn uses all of the npm packages it is only a different installation process - using cloudflare, multiple installations happen at the same time
 
@@ -245,15 +261,11 @@ Using both at the same time creates conflicts so use one or the other in the CLI
 
 
 #### What is nodemon?
-
 Nodemon hot loads the back end server so you do not need to run commands such as  ```node src/backend/app.js``` (used in this project).
-
 Check in your package-JSON for the install and read documentation [https://github.com/remy/nodemon] which helps bug fixing if you encounter challenges hot-loading.
 
 
-
 ### How to guide to connect the front-end react app to the node-express environment
-
 
 ##### Challenge -18 Setting up the backend server with node and express
 
@@ -275,8 +287,8 @@ Reconfigure project files with 2 source folders one for the frontend and one for
 Install node and express in the project and check package-json to ensure they are added as dev-dependencies.
 
 [yarn init] (intialise the project)
-[yarn add node] (install node)
-[yarn add express] (install express midware that runs data from server via axios to Postman/ Insomnia)
+[yarn add node -S] [npm install node]
+[yarn add express] [npm install express -S](install express midware that runs data from server via axios to Postman/ Insomnia)
 
 With node.js the import-export methods in react.js do not work as they work in different ways.
 
@@ -287,9 +299,9 @@ Replace the ```export default function getFilms() { return [{}]}``` method which
 There several methods you can use to fetch data and the syntax is described well in this article -  Read [https://www.openmymind.net/2012/2/3/Node-Require-and-Exports/]
 
 Notes on the above documentation:-
-In the data section the module you can write is fairly simple ```module.exports = function filmsData() {return {[{  }]}}``` with the return statement returning an array of objects with your data enclosed.
+In the data section the module you can write is fairly simple ```module.exports = function filmsData() {return {[{  }]}``` with the return statement returning an array of objects with your data enclosed.
 
-In the app.js file the  ```app.get('path', function(request, response) { return response.send() })``` method, the first arguement is the backend API url path you create. ```app``` refers to the express app that has been declared as a variable when you set up the backend server with express. The second argument is a call-back function that takes two arguements - request and response. The request is the information/data/ payload to the server. The call back function returns the ```response.send()``` method which returns the data/payload object (filmsData{}) from the server created in the node modeule via the ```module.exports``` function back to the user.
+In the app.js file the  ```app.get('path', function(request, response) { return response.send() })``` method, the first argument is the backend API url path you create. ```app``` refers to the express app that has been declared as a variable when you set up the backend server with express. The second argument is a call-back function that takes two arguements - request and response. The request is the information/data/ payload to the server. The call back function returns the ```response.send()``` method which returns the data/payload object (filmsData{}) from the server created in the node modeule via the ```module.exports``` function back to the user.
 
 Written in ES6 ```app.get('/api-filmsData/filmsData', (req, res) => res.send(films.filmsData));``` the ```app.get()``` method can be written in one line with an implicit return in the call back function.
 
@@ -298,7 +310,6 @@ You need to have the backend server running so run ```node src/back-end/app.js``
 You Tube tutorials to review at this stage really useful to get the concepts of node and modules - it gives you a good theoretical understanding of node. Mosh on node [https://www.youtube.com/watch?v=TlB_eWDSMt4]
 
 #### Challenge -20 Add nodemon
-
 Install nodemon [yarn add nodemon] to hot-load backend 
 In package-json change the script files and direct backend script to the file path you have created in node.js
 
@@ -318,7 +329,7 @@ In the case of my app this is
 
 If you use yarn you can get stuck in this challenge -  read this section of the npm documentation [https://libraries.io/npm/yarn-run-all] and see the code block at the end for what your scripts file should look like
 
-Install run-all as a dev dependency [yarn add run-all]
+Install run-all [npm install npm-run-all] as a dev dependency [yarn add run-all]
 This will allow you to run the ports for the frontend and backend servers in parallel, 
 
 Read the documentation on ```npm -p``` and ```npm -s``` [https://www.npmjs.com/package/npm-run-all]
@@ -425,8 +436,40 @@ Use template literals - read documentation here: [https://developer.mozilla.org/
 #### Challenge -25 add loading image 
 
 ## Appendicies 
+#### Appendix -1: How to set up a project with npm webpack build
+Instead of npx create reactapp [appname] Web pack project set up 
+If you install a package that you do not require [npm uninstall <package name>]
+1.  [npm init] [yarn init] (this initializes npm. The password & other prompts are invisible, hit return on all compilers).  
+2.  [npm install web-pack webpack-cli webpack-dev-server html-webpack-plugin –D] (installs webpack) 
+3.  [npm install babel-loader style-loader css-loader sass-loader –D] (installs babel, css and sass pre-compilers or loaders)
+4.  [npm install @babel/core @babel/preset-env –D] (installs the babel & env files - babel transpiles jsx into es6)
+5   [npm install dotenv-webpack –D] (installs the env files and webpack)
 
-#### Appendix-1 Some common CLI commands in yarn vs. npm
+Add the project files outside src folder
+1. [touch .babelrc] (creates a babel file in project)
+2. [touch webpack.config.js] (in the main file not in the src file)
+3. [touch .env] (creates an env. file in project)
+
+Add the source directory file and project files - structure src files according to project needs
+1.   [mkdir src] (makes directory called source)
+2.   [touch src/index.html src/app.js src/style.scss] (makes files for html, css and vanilla js) 
+
+Add front-end libraries you might want [npm install <library name> -S]1. [npm install mapbox-gl –S] (installs mapbox)
+2. [npm install bulma –S] installs bulma (as a project dependency not a compiler only a library)
+3. [npm install node-sass –D] (installs sass - as a dev dependency as it is a complier)
+4. [npm i jquery –S] (installs j-query)
+5. [npm install react react-dom -S] (installs react and react dom)
+6. [npm i react-router-dom –S] (installs the router component of react) 
+
+Add backend dependencies and libraries
+1. [npm install nodemon] (adds hot loading of backend server with nodemon)
+2. [npm install node]  (adds node.js)
+3. [npm install express] (install express.js midware that runs data from server via axios to Postman/ Insomnia)
+4.  [npm add axios] (installs axios runner from backend with JSON files to Insomnia or Postman Axios no need to install body-parser any more, it comes inbuilt)
+5. [npm install request-promise] [npm install request] (sets up back end API to get methods of request-promise from ES-6
+6.[npm install mongoose] (adds mongoose.js to set up MongoDB Schemas)
+
+#### Appendix-2 Some common CLI commands in yarn vs. npm
 
 - [yarn add] [npm install] - (installs the package required on a project)
 - [npm uninstall i](uninstall if the package not installed correctly)
@@ -439,47 +482,10 @@ Use template literals - read documentation here: [https://developer.mozilla.org/
 - [npm update] - (updates packages)
 - [npm outdated] (checks for outdated packages)
 - [yarn run start backend]/ [yarn start:server]/ [npm run start backend]
-
-#### Appendix -2: How to set up a project with npm or yarn
-
-Instead of npx create reactapp [appname], the way to set up a project is to build it with the components you want from the package - my GA notes when we created our project apps
-
-- Yarn commands to set up server
-
-- [yarn init] (intialise the project)
-- [yarn add node] (install node)
-- [yarn add express] (install express midware that runs data from server via axios to Postman/ Insomnia)
-- [yarn add request-promise] [yarn add request] (sets up back end API to get methods of request-promise for async non-blocking threads to work)
-- [yarn add axios] (installs axios runner from backend with JSON files to Insomnia or Postman Axios therefore you need body-parser)
-- [yarn add body-Parser] (allows you to visualize data (json body) in insomnia or postman rather than the server  
-- [Yarn add dotenv] (installs authentication tokens files)
-
-
-1.	[npm init] [yarn init] (this initializes npm – the password and other prompts are invisible, you need to hit return till you get OK on all compilers).  
-2.	[npm i web-pack webpack-cli webpack-dev-server html-webpack-plugin –D] (installs webpack) [yarn add]
-3.	[npm i babel-loader style-loader css-loader sass-loader –D] (installs babel, css and sass pre-compilers or loaders)
-4.	[npm i @babel/core @babel/preset-env –D] (installs the babel & env files - babel transpiles jsx into es6)
-5.	[touch .babelrc] (creates a babel file in project)
-6.	[npm i node-sass –D] (installs sass) 
-7.	[mkdir src] (makes directory called source)
-8.	[touch src/index.html] [touch src/app.js] [touch src/style.scss] (makes files for html, css and vanilla js) 
-9.	[touch webpack.config.js] (in the main file not in the src file)
-10.	[npm i jquery –S] (installs j-query)
-11.	[npm run serve] (this is the listener)
-12.	[npm i react react-dom –S] (intalls react and react-dom)
-13. [npm i axios –S] installs axios
-14.	[npm i mapbox-gl –S] (installs mapbox)
-15. [npm i react-router-dom –S] (installs the router component of react)
-16. [npm i axios react-router-dom bulma -S ] (installs axios, react router and bulma)
-17. [npm i dotenv-webpack –D] (installs the env files and webpack)
-18. [touch .env] (creates an env. file in project)
-19. [yarn add nodemon] [npm install nodemon] (installs nodemon to project)
-
 - CLI documentation
 
 [npm] CLI documentation link [https://docs.npmjs.com/cli-documentation/cli] 
 [yarn] CLI documentation [https://yarnpkg.com/lang/en/docs/cli/]
-
 
 #### Appendix -3: - my notes on CRUD
 
@@ -519,4 +525,3 @@ Blow up one (by Id) Blow up all (Delete)
 In Insomnia - remove all info and send
 
 
-Promises take 2 arguments ```return new Promise (resolve, reject)``` followed by```.then()``` blocks

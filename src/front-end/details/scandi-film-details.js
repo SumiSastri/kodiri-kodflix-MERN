@@ -6,12 +6,12 @@ export default class ScandiFilmDetails extends Component {
 	constructor() {
 		super();
 		this.state = {
-			film: {}
+			films: {}
 		};
 	}
 
 	componentDidMount() {
-		fetch('./films/films-data')
+		fetch('/api/films-data')
 			.then((res) => res.json())
 			.then((res) => {
 				this.setState({ res });
@@ -20,25 +20,25 @@ export default class ScandiFilmDetails extends Component {
 	}
 	render() {
 		// deconstruct state
-		let film = this.state.film;
-		if (film === undefined) {
+		let films = this.state.films;
+		if (films === undefined) {
 			return <Redirect to="/pageNotFound" />;
 		} else {
 			return (
 				<div className="film-details-container">
-					<h1 className="details-header">{film.name}</h1>
+					<h1 className="details-header">{films.name}</h1>
 
 					<div className="details-info">
 						<div className="details-cover-container">
-							<img alt={film.name} className="details-image" src={film.cover} />
+							<img alt={films.name} className="details-image" src={films.cover} />
 							<div className="details-image-overlay">
-								<h2>{film.country}</h2>
+								<h2>{films.country}</h2>
 							</div>
 						</div>
 
 						<div className="details-description-review">
-							<h2>{film.description}</h2>
-							<p>{film.review}</p>
+							<h2>{films.description}</h2>
+							<p>{films.review}</p>
 						</div>
 					</div>
 					<Link to="/">

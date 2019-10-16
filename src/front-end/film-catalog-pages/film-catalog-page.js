@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function FilmCatalog(props) {
+// deconstruct props as now they are taken from updated state
+function FilmCatalog({ id, cover, description }) {
 	return (
-		<Link to={`/${props.id}`} className="film-cover">
-			<img alt={'scandinavian-noir-film-cover'} src={props.cover} />
+		<Link to={`/${id}`} className="film-cover">
+			<img alt={'scandinavian-noir-film-cover'} src={cover} />
 			<div className="film-cover-overlay">
-				<h5>{props.description}</h5>
+				<h5>{description}</h5>
 			</div>
 		</Link>
 	);
