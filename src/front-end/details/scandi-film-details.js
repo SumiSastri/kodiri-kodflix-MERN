@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import '../../App.css';
+import '../../App';
+import '../../index';
 
 export default class ScandiFilmDetails extends Component {
 	constructor() {
@@ -13,16 +14,16 @@ export default class ScandiFilmDetails extends Component {
 		fetch('/api/films-data')
 			.then((res) => res.json())
 			.then((films) => {
-				// console.log(films);
+				// console.log(films)
+				// let routeFilmId = this.props.match.params.routeFilmId;
+				// films in the find method is the getFilmsData() which is now a param
+				// let what = films.find(film => films.id === routeFilmId);
 				this.setState({ films: films });
-				// console.log(this.state);
 			})
 			.catch((error) => console.log(error));
 	}
-
 	render() {
 		let films = this.state.films;
-		console.log(films);
 		if (films === undefined) {
 			return <Redirect to="/pageNotFound" />;
 		} else {
@@ -31,11 +32,7 @@ export default class ScandiFilmDetails extends Component {
 					<h1 className="details-header">{films.name}</h1>
 					<div className="details-info">
 						<div className="details-cover-container">
-							<img
-								alt={films.name}
-								className="details-image"
-								// src={require(`src/front-end/assets/${films.id}.jpg`)}
-							/>
+							<img alt={films.name} className="details-image" src={films.cover} />
 							<div className="details-image-overlay">
 								<h2>{films.country}</h2>
 							</div>

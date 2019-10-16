@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import FilmCatalog from './film-catalog-page';
+import '../../App.css';
+import '../../index.css';
 
 export default class FilmCatalogGallery extends Component {
 	constructor() {
@@ -12,11 +14,8 @@ export default class FilmCatalogGallery extends Component {
 		fetch('/api/films-data')
 			.then((res) => res.json())
 			.then((films) => {
-				// .then((films) => this.setState({}));
-				// do not remove checks the loading message works
 				//  or test by slowing down speed of the network to slow 3G
 				this.setState({ films: films });
-				// console.log(this.state);
 			})
 			.catch((error) => console.log(error));
 	}
@@ -39,6 +38,8 @@ export default class FilmCatalogGallery extends Component {
 								id={films[i].id}
 								cover={films[i].cover}
 								description={films[i].description}
+								name={films[i].name}
+								country={films[i].country}
 							/>
 						);
 					})}
@@ -47,3 +48,32 @@ export default class FilmCatalogGallery extends Component {
 		);
 	}
 }
+
+// import React from 'react';
+// import FilmCatalog from './film-catalog-page';
+
+// const FilmCatalogGallery = ({ films }) => {
+// 	return (
+// 		<main className="films-container">
+// 			<header className="header">
+// 				<h1> Scandinavian-Noir Kodiri 's Kodflix Challenge</h1>
+// 			</header>
+// 			<div className="film-covers-container">
+// 				{films.map((film, i) => {
+// 					return (
+// 						<FilmCatalog
+// 							key={i}
+// 							id={films[i].id}
+// 							cover={films[i].cover}
+// 							description={films[i].description}
+// 							name={films[i].name}
+// 							country={films[i].country}
+// 						/>
+// 					);
+// 				})}
+// 			</div>
+// 		</main>
+// 	);
+// };
+
+// export default FilmCatalogGallery;
