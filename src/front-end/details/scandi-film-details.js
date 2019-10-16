@@ -12,13 +12,17 @@ export default class ScandiFilmDetails extends Component {
 	componentDidMount() {
 		fetch('/api/films-data')
 			.then((res) => res.json())
-			.then((res) => {
-				this.setState({ res });
+			.then((films) => {
+				// console.log(films);
+				this.setState({ films: films });
+				// console.log(this.state);
 			})
 			.catch((error) => console.log(error));
 	}
+
 	render() {
 		let films = this.state.films;
+		console.log(films);
 		if (films === undefined) {
 			return <Redirect to="/pageNotFound" />;
 		} else {
@@ -27,7 +31,11 @@ export default class ScandiFilmDetails extends Component {
 					<h1 className="details-header">{films.name}</h1>
 					<div className="details-info">
 						<div className="details-cover-container">
-							<img alt={films.name} className="details-image" src={films.cover} />
+							<img
+								alt={films.name}
+								className="details-image"
+								// src={require(`src/front-end/assets/${films.id}.jpg`)}
+							/>
 							<div className="details-image-overlay">
 								<h2>{films.country}</h2>
 							</div>

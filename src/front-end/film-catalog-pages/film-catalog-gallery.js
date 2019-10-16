@@ -9,11 +9,16 @@ export default class FilmCatalogGallery extends Component {
 		};
 	}
 	componentDidMount() {
-		fetch('/api/films-data').then((res) => res.json()).then((films) => {
-			this.setState({ films: films });
-			// .then((films) => this.setState({}));
-			// do not remove checks the loading message works
-		});
+		fetch('/api/films-data')
+			.then((res) => res.json())
+			.then((films) => {
+				// .then((films) => this.setState({}));
+				// do not remove checks the loading message works
+				//  or test by slowing down speed of the network to slow 3G
+				this.setState({ films: films });
+				// console.log(this.state);
+			})
+			.catch((error) => console.log(error));
 	}
 	render() {
 		let films = this.state.films;

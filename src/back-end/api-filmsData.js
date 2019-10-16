@@ -2,6 +2,7 @@ module.exports = function getFilmData() {
 	return [
 		{
 			id: 'the-wave-film',
+			cover: 'bolgen',
 			name: 'the-wave',
 			country: 'Norway',
 			description: `A family get trapped when a landslide is caused by a tidal wave.`,
@@ -16,6 +17,7 @@ module.exports = function getFilmData() {
 		{
 			id: 'the-hunt-film',
 			name: 'the-hunt',
+			cover: 'theHunt',
 			description: `Twelve strangers wake up in a clearing, they now have to prepare for the hunt,
 but what (or who) is the prey?`,
 			country: 'Norway',
@@ -29,6 +31,7 @@ but what (or who) is the prey?`,
 		{
 			id: 'girl-with-dragon-tattoo-film',
 			name: 'the-girl-with-the-dragon-tattoo',
+			cover: 'girlWithTheDragonTattoo',
 			description: `What happens when a journalist, computer hacker and
 		sadist's fates are entagled with each other?`,
 			country: 'Sweden',
@@ -46,6 +49,7 @@ but what (or who) is the prey?`,
 			id: 'snabbe-cash-film',
 			description: `A student wants to make some easy money as a cab driver, it gets messy as
 		the criminal underworld are his passengers`,
+			cover: 'snabbeCash',
 			country: 'Sweden',
 			review: `Lower-class business student JW (Joel Kinnaman) falls in love with a sexy heiress 
 			while living a double life mingling with Stockholm's wealthy elite. To keep up the façade of 
@@ -61,6 +65,7 @@ but what (or who) is the prey?`,
 			name: 'trapped',
 			description: `A multilated corpse is found by a fisherman, who does the headless, limbless
 		body belong to?`,
+			cover: 'trapped',
 			country: 'Iceland',
 			review: `You have to feel for poor Andri in “Trapped”, even before everything goes wrong. 
 			He’s the police chief of Seyðisfjörður, a bleak little place at the end of a fjord in the east 
@@ -80,6 +85,7 @@ but what (or who) is the prey?`,
 			name: 'dicte',
 			description: `A divorced journalist goes back to her home town to make peace with her past, but
 		things take an ugly turn`,
+			cover: 'dicte',
 			country: 'Denmark',
 			review: `The series is named for the title character, Dicte Svendsen, played by Iben Hjejle. 
 			Dicte is a crime reporter who goes back to her hometown of Aarhus after a divorce.  
