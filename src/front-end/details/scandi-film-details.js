@@ -9,7 +9,6 @@ export default class ScandiFilmDetails extends Component {
 			films: {}
 		};
 	}
-
 	componentDidMount() {
 		fetch('/api/films-data')
 			.then((res) => res.json())
@@ -19,7 +18,6 @@ export default class ScandiFilmDetails extends Component {
 			.catch((error) => console.log(error));
 	}
 	render() {
-		// deconstruct state
 		let films = this.state.films;
 		if (films === undefined) {
 			return <Redirect to="/pageNotFound" />;
@@ -27,7 +25,6 @@ export default class ScandiFilmDetails extends Component {
 			return (
 				<div className="film-details-container">
 					<h1 className="details-header">{films.name}</h1>
-
 					<div className="details-info">
 						<div className="details-cover-container">
 							<img alt={films.name} className="details-image" src={films.cover} />
@@ -35,7 +32,6 @@ export default class ScandiFilmDetails extends Component {
 								<h2>{films.country}</h2>
 							</div>
 						</div>
-
 						<div className="details-description-review">
 							<h2>{films.description}</h2>
 							<p>{films.review}</p>

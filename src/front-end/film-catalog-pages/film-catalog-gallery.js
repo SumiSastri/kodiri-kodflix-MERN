@@ -8,24 +8,24 @@ export default class FilmCatalogGallery extends Component {
 			films: []
 		};
 	}
-	// fetch films from the backend, turn the response into a json file, then set state to the films array
 	componentDidMount() {
 		fetch('/api/films-data').then((res) => res.json()).then((films) => {
-			// console.log(films);
 			this.setState({ films: films });
+			// .then((films) => this.setState({}));
+			// do not remove checks the loading message works
 		});
-		// console.log(this.state);
 	}
 	render() {
-		// deconstruct state
 		let films = this.state.films;
-		// console.log(this.state);
-		return (
+		return !films.length ? (
+			<div>
+				<h2>Please wait this page is still loading</h2>
+			</div>
+		) : (
 			<main className="films-container">
 				<header className="header">
 					<h1> Scandinavian-Noir Kodiri 's Kodflix Challenge</h1>
 				</header>
-				{/* now change state map with index param */}
 				<div className="film-covers-container">
 					{films.map((film, i) => {
 						return (

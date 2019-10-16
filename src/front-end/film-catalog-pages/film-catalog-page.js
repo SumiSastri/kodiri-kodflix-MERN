@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// deconstruct props as now they are taken from updated state
 function FilmCatalog({ id, cover, description }) {
 	return (
 		<Link to={`/${id}`} className="film-cover">
