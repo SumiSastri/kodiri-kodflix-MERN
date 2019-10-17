@@ -15,9 +15,8 @@ export default class ScandiFilmDetails extends Component {
 			.then((res) => res.json())
 			.then((films) => {
 				// console.log(films)
-				// let routeFilmId = this.props.match.params.routeFilmId;
-				// films in the find method is the getFilmsData() which is now a param
-				// let what = films.find(film => films.id === routeFilmId);
+				// let filmId = this.props.match.params.filmId;
+				// let what = films.find(film => films.id === filmId)
 				this.setState({ films: films });
 			})
 			.catch((error) => console.log(error));
