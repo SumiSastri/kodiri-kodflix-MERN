@@ -259,13 +259,11 @@ Using both at the same time creates conflicts so use one or the other in the CLI
 * Scotch[https://scotch.io/tutorials/yarn-package-manager-an-improvement-over-npm]
 * Keycdn (almost the same as scotch.io) [https://www.keycdn.com/blog/npm-vs-yarn]
 
-
 #### What is nodemon?
 Nodemon hot loads the back end server so you do not need to run commands such as  ```node src/backend/app.js``` (used in this project).
 Check in your package-JSON for the install and read documentation [https://github.com/remy/nodemon] which helps bug fixing if you encounter challenges hot-loading.
 
-
-### How to guide to connect the front-end react app to the node-express environment
+# HOW TO GUIDE - CHALLENGES 18 TO 30
 
 ##### Challenge -18 Setting up the backend server with node and express
 
@@ -299,13 +297,13 @@ Replace the ```export default function getFilms() { return [{}]}``` method which
 There several methods you can use to fetch data and the syntax is described well in this article -  Read [https://www.openmymind.net/2012/2/3/Node-Require-and-Exports/]
 
 Notes on the above documentation:-
-In the data section the module you can write is fairly simple ```module.exports = function filmsData() {return {[{  }]}``` with the return statement returning an array of objects with your data enclosed.
+In the data section the module you can write is fairly simple ```module.exports = function getFilmsData() {return {[{  }]}``` with the return statement returning an array of objects with your data enclosed.
 
-In the app.js file the  ```app.get('path', function(request, response) { return response.send() })``` method, the first argument is the backend API url path you create. ```app``` refers to the express app that has been declared as a variable when you set up the backend server with express. The second argument is a call-back function that takes two arguements - request and response. The request is the information/data/ payload to the server. The call back function returns the ```response.send()``` method which returns the data/payload object (filmsData{}) from the server created in the node modeule via the ```module.exports``` function back to the user.
+In the app.js file the  ```app.get('path', function(request, response) { return response.send() })``` method, the first argument is the backend API url path you create. ```app``` refers to the express app that has been declared as a variable when you set up the backend server with express. The second argument is a call-back function that takes two arguements - request and response. The request is the information/data/ payload to the server. The call back function returns the ```response.send()``` method which returns the data/payload object ```(getfilmsData{})``` and returns the films data as an object from the server created in the node modeule via the ```module.exports``` function back to the user.
 
-Written in ES6 ```app.get('/api-filmsData/filmsData', (req, res) => res.send(films.filmsData));``` the ```app.get()``` method can be written in one line with an implicit return in the call back function.
+Written in ES6 ```app.get('/api/films-data', (req, res) => res.send(getFilmData()));``` the ```app.get()``` method can be written in one line with an implicit return in the call back function. Note the syntax as there are several call back parenthesis! The first from get, the second from req-re and the final one from the get data from the node files!
 
-You need to have the backend server running so run ```node src/back-end/app.js``` and then check the path you have set up in the google chrome browser search bar  [3000/films/data] and the data should display on the screen. At this stage we have not changed the back-end port to 3001.
+You need to have the backend server running so run ```node src/back-end/app.js``` and then check the path you have set up in the google chrome browser search bar  [3000/films/data] and the data should display on the screen. At this stage we have not changed the back-end port to 3001. It is better to call this server.js rather than app.js, but for this project at this stage I have not refactored and renamed.
 
 You Tube tutorials to review at this stage really useful to get the concepts of node and modules - it gives you a good theoretical understanding of node. Mosh on node [https://www.youtube.com/watch?v=TlB_eWDSMt4]
 
@@ -327,7 +325,7 @@ In the case of my app this is
 
 #### Challenge -21 Create a client-side and server-side port in your local environment
 
-If you use yarn you can get stuck in this challenge -  read this section of the npm documentation [https://libraries.io/npm/yarn-run-all] and see the code block at the end for what your scripts file should look like
+If you use yarn you can get stuck in this challenge -  read this section of the npm documentation [https://libraries.io/npm/yarn-run-all] and see the code block at the end for what your scripts file should look like.
 
 Install run-all [npm install npm-run-all] as a dev dependency [yarn add run-all]
 This will allow you to run the ports for the frontend and backend servers in parallel, 
@@ -349,7 +347,253 @@ Double check your scripts file - it should look like this with npm commands
 
 Go to your terminal and check that this works   [yarn run start-dev] or [yarn start-dev]  both should work, now check your two 2 servers 3000 and 3001 to ensure they are running at the same time.
 
-#### Challenge -22 Link the client-side react app and server-side express app
+#### Challenge -22, 24 & 25 Link the client-side react app and server-side express app
+
+It is confusing to do these three challenges in the order provided by Kodiri - I have grouped them together as they are all related to moving data from the front-end to the backend and rendering all the props correctly in each of the components.
+
+It is also not useful, in my opinion to set up the backend server ready for deploy when the components are not rendering the images correctly so one of the tasks in challenge 22 I have moved to challenge 23 which, in my opinion should be task 26 running after this section.
+
+I found these resources really helped me unpick the confusing instructions set for these challenges.
+
+Using the fetch API now get your data from the node environment you have created to store your data [https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch]
+
+A handy YouTube Video that explains the fetch method[https://www.youtube.com/watch?v=v0t42xBIYIs] and the connectivity between the frontend react app and the backend node & express.
+
+These are the steps I used to combine 22,24 and 25:-
+
+Create a stateful component and use the lifecycle hook componentDidMount
+
+```
+import React, { Component } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import '../../App';
+import '../../index';
+
+export default class ScandiFilmDetails extends Component {
+	constructor() {
+		super();
+		this.state = {
+			films: {}
+		};
+	}
+	componentDidMount() {
+		fetch('/api/films-data')
+			.then((res) => res.json())
+			.then((filmsBackend) => {
+				<!-- console.log(filmsBackend); -->
+				let filmId = this.props.match.params.filmId;
+				let films = filmsBackend.find((films) => films.id === filmId);
+				this.setState({ films: films });
+				<!-- console.log(this.state) -->
+			})
+			.catch((error) => console.log(error));
+	}
+
+```
+
+1. To distinguish between the all the conflicting names of films, filmIds, filmsBackend is the data that comes from the node module exported into the express server and then is changed to JSOn in the response.
+
+2. Check the data flows with a console.log(filmsBackend)
+
+3. Now you are looking at assigning the filmId from the route path in the routes section to match the props and params of the filmId route path
+
+4. Store films as a variable that will replace the backend data - the filmsBackend.find method is used to find the films.id from the node module export and it sets it as exactly equal to the filmId in the route path
+
+5. Now state can be set to the films variable that has found the films.id from the node module - console.log(this.state) and check the data is flowing.
+
+6. You might get errors at this stage if you have not migrated your image data to the backend 
+
+7. In the node module check the image prop ```cover: 'dicte-film',``` and check that the name of the image file corresponds ```src/front-end/assets/dicte-film.jpeg``` also check that all the files are either jpeg or svg or png - as mixed file extensions will not work. 
+
+8. Look at your render method now deconstruct and run a conditional render for mistypes to the page not found component.
+
+```
+let films = this.state.films;
+		if (films === undefined) {
+			return <Redirect to="/pageNotFound" />;
+		} else if (films.id) {
+			return (
+```
+
+Use template literals to render the image jsx tag
+
+```
+<img
+								alt={films.name}
+								className="details-image"
+								src={require(`../assets/${films.cover}.jpeg`)}
+							/>
+```							
+
+Check the deconstructed props are rendering
+
+```
+<div className="details-description-review">
+							<h2>{films.description}</h2>
+							<p>{films.review}</p>
+						</div>
+```
+
+Run another conditional render for a page loading message
+
+```
+<Link to="/">
+						<h4>Back to home page</h4>
+					</Link>
+				</div>
+			);
+		} else {
+			return (
+				<div>
+					<h2>Please wait this page is still loading</h2>
+				</div>
+```
+
+
+9. At this stage the parent component (details should look like this)
+
+```
+import React, { Component } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import '../../App';
+import '../../index';
+
+export default class ScandiFilmDetails extends Component {
+	constructor() {
+		super();
+		this.state = {
+			films: {}
+		};
+	}
+	componentDidMount() {
+		fetch('/api/films-data')
+			.then((res) => res.json())
+			.then((filmsBackend) => {
+				console.log(filmsBackend);
+				let filmId = this.props.match.params.filmId;
+				let films = filmsBackend.find((films) => films.id === filmId);
+				this.setState({ films: films });
+			})
+			.catch((error) => console.log(error));
+	}
+	render() {
+		let films = this.state.films;
+		if (films === undefined) {
+			return <Redirect to="/pageNotFound" />;
+		} else if (films.id) {
+			return (
+				<div className="film-details-container">
+					<h1 className="details-header">{films.name}</h1>
+					<div className="details-info">
+						<div className="details-cover-container">
+							<img
+								alt={films.name}
+								className="details-image"
+								src={require(`../assets/${films.cover}.jpeg`)}
+							/>
+							<div className="details-image-overlay">
+								<h2>{films.country}</h2>
+							</div>
+						</div>
+						<div className="details-description-review">
+							<h2>{films.description}</h2>
+							<p>{films.review}</p>
+						</div>
+					</div>
+					<Link to="/">
+						<h4>Back to home page</h4>
+					</Link>
+				</div>
+			);
+		} else {
+			return (
+				<div>
+					<h2>Please wait this page is still loading</h2>
+				</div>
+			);
+		}
+	}
+}
+```
+
+Check to see if the error method works in the console, write it incorrectly to catch error as well, you should see the data pulling from the api-filmsData in the network tab. You can now delete the commented out code.
+
+10. As this is the parent page you need to look at all the children rendering correctly as well.  The component which is mapping through the array of objects needs to changed to a stateful component. Here state is an array, to show the difference between state as an object and state as an array, I have renamed the array as ```filmsBackend[]``` in the map functions ensure props have both a key and an id to meet the React jsx syntax requirements. Deconstruct state ```	let films = this.state.filmsBackend;``` so that films when passed as a prop is named consistently.
+
+```
+import React, { Component } from 'react';
+import FilmCatalog from './film-catalog-page';
+import '../../App.css';
+import '../../index.css';
+
+export default class FilmCatalogGallery extends Component {
+	constructor() {
+		super();
+		this.state = {
+			filmsBackend: []
+		};
+	}
+	componentDidMount() {
+		fetch('/api/films-data')
+			.then((res) => res.json())
+			.then((filmsBackend) => {
+				this.setState({ filmsBackend });
+			})
+			.catch((error) => console.log(error));
+	}
+	render() {
+		let films = this.state.filmsBackend;
+		return (
+			<main className="films-container">
+				<header className="header">
+					<h1> Scandinavian-Noir Kodiri 's Kodflix Challenge</h1>
+				</header>
+				<div className="film-covers-container">
+					{films.map((films) => (
+						<FilmCatalog
+							id={films.id}
+							key={films.id}
+							cover={films.cover}
+							description={films.description}
+							name={films.name}
+							country={films.country}
+						/>
+					))}
+				</div>
+			</main>
+		);
+	}
+}
+```
+Ensure that the child of the page renders props correctly - especially images with template literals and the file path
+
+```
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../../App.css';
+import '../../index.css';
+
+function FilmCatalog({ id, cover, description }) {
+	return (
+		<Link to={`/${id}`} className="film-cover">
+			<img alt={'scandinavian-noir-film-cover'} src={require(`../assets/${cover}.jpeg`)} />
+			<div className="film-cover-overlay">
+				<h5>{description}</h5>
+			</div>
+		</Link>
+	);
+}
+export default FilmCatalog;
+
+```
+#### Challenge -23 enable the backend server for deploy 
+
+Once you can see the component rendering in the way it is you can remove the commented out code and link the back-end data and the front-end rendering of the data. I think this challenge should be 26 coming after you understand the complex network of imports, stateful components, passing props down to child components and the React data flows from the backend node module, via express into the stateful components and then into the functional components.
+
+Since there are several components this is the time that the app will break as the data is no longer 
+linking from the front end files but need to be fetched and rendered from the backend node environment. Therefore rather that run this challenge at 23 when the app breaks and you waste significant amount of time figuring out the confusing maze of React components. I think it is useful to run the build and deploy environment only at this stage.
+
+As a pre-deploy you need to run [yarn run build] to set up a build all packages file path to deploy to heroku. Add an env. file. [yarn add .env] and the proxy server should be joined as one file for heroku
 
 Create a proxy connection and ensure you have added it to your package-json (under the scripts section - it is not part of dev dependencies or scripts) like so:-
 
@@ -360,44 +604,11 @@ Create a proxy connection and ensure you have added it to your package-json (und
 	},
 ```
 
+This is not strictly necessary unless you are deploying to Heroku at this stage. You can still work in the dev environment. But if you want to deploy before you move the data from the node environment to a database these are the steps to follow.
+
 Read the documentation on how to create a proxy Creating a proxy[https://create-react-app.dev/docs/proxying-api-requests-in-development]
 
-Restart the servers - make sure that your data is flowing on port 3001 (as in task 19) and the front end is rendering in port 3000
-
-Now you can use the API methods in the CRUD lifecycle to use data you have shifted to the node environment using express as a runner. In the front end, you can now use the to fetch fetch method in your ```componentDidMount``` method in the react app to fetch data from the backend and replace the function in the react lifecycle method like so:-
-
-Comment this out
-
-```componentDidMount() {
-		let filmId = this.props.match.params.filmId;
-		let film = getFilms().find((film) => film.id === filmId);
-		this.setState({ film });
-	}
-```
-Using the fetch API now get your data from the node environment you have created to store your data [https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch]
-
-A handy YouTube Video that explains the fetch method[https://www.youtube.com/watch?v=v0t42xBIYIs] and the connectivity between the frontend react app and the backend node & express.
-
-```
-	componentDidMount() {
-		fetch('./api-filmsData/filmsData')
-			.then((res) => res.json())
-			.then((res) => {
-				this.setState({ res });
-			})
-			.catch((error) => console.log(error));
-	}
-```
-Check to see if the function works in the console, write it incorrectly to catch error as well, you should see the data pulling from the api-filmsData in the network tab. You can now delete the commented out code and replace it with the fetch method to get all your data from the backend.
-
-#### Challenge -23 enable the backend server for deploy 
-
-Once you can see the component rendering in the way it is you can remove the commented out code and link the back-end data and the front-end rendering of the data.
-
-Since there are several components this is the time that the app will break as the data is no longer 
-linking from the front end files but need to be fetched and rendered from the backend node environment.
-
-As a pre-deploy you need to run [yarn run build] to set up a build all packages file path to deploy to heroku. Add an env. file. [yarn add .env] and the proxy server should be joined as one file for heroku
+Restart the servers - make sure that your data is flowing on port 3001 (as in task 19) and the front end is rendering in port 3000.
 
 The back-end app.js should look like this at this stage
 
@@ -424,18 +635,63 @@ app.get('*', function(req, res) {
 app.listen(port, () => console.log(`Kodiri-Kodflix app listening on port ${port}!`));
 ```
 
-The comments helped me de-bug each line as this was the stage where things were not working.
+The comments helped me de-bug each line as this was the stage where things were not working due to the confusing instructions and the jumping of tasks from front-end to backend to dev-ops to CSS.
+
 It is very important that the app works in the way it is intended to work before deploy otherwise it will not render correctly on the heroku app.
 
-#### Challenge -24 add the images dynamically 
+So check your package JSOn at this stage it should look like this
 
-Introduce state and a constructor with a render method for the gallery component ```film-catalog-gallery``` replace the imports from react (importing the individual files from their location in the front-end assets folder).
+```
+{
+	"name": "kodiri-kodflix",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"node": "^12.12.0",
+		"nodemon": "^1.19.2",
+		"npm-run-all": "^4.1.5",
+		"react": "^16.8.6",
+		"react-dom": "^16.8.6",
+		"react-router-dom": "^5.0.1",
+		"react-scripts": "3.0.1",
+		"request-promise": "^4.2.4"
+	},
+	"scripts": {
+		"start": "npm-run-all -s build start-backend",
+		"start-frontend": "react-scripts start",
+		"start-backend": "nodemon src/back-end/app.js",
+		"start-dev": "npm-run-all -p start-frontend start-backend",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"proxy": "http://localhost:3001",
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
+}
+```
+You are now ready to deploy OR set up the MongoDb database - challenge 26
 
-Use template literals - read documentation here: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals]
-
-#### Challenge -25 add loading image 
+#### Challenge -26 set up MongoDb and move your data from the node module to a cloud-based database
 
 ## Appendicies 
+
 #### Appendix -1: How to set up a project with npm webpack build
 Instead of npx create reactapp [appname] Web pack project set up 
 If you install a package that you do not require [npm uninstall <package name>]
