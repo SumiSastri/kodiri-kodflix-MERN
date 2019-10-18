@@ -31,7 +31,11 @@ export default class ScandiFilmDetails extends Component {
 					<h1 className="details-header">{films.name}</h1>
 					<div className="details-info">
 						<div className="details-cover-container">
-							<img alt={films.name} className="details-image" src={films.cover} />
+							<img
+								alt={films.name}
+								className="details-image"
+								src={require(`../assets/${films.cover}.jpeg`)}
+							/>
 							<div className="details-image-overlay">
 								<h2>{films.country}</h2>
 							</div>
