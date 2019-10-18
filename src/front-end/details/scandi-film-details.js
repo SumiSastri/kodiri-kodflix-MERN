@@ -13,10 +13,10 @@ export default class ScandiFilmDetails extends Component {
 	componentDidMount() {
 		fetch('/api/films-data')
 			.then((res) => res.json())
-			.then((films) => {
-				// console.log(films)
-				// let filmId = this.props.match.params.filmId;
-				// let what = films.find(film => films.id === filmId)
+			.then((filmsBackend) => {
+				console.log(filmsBackend);
+				let filmId = this.props.match.params.filmId;
+				let films = filmsBackend.find((films) => films.id === filmId);
 				this.setState({ films: films });
 			})
 			.catch((error) => console.log(error));
@@ -25,7 +25,7 @@ export default class ScandiFilmDetails extends Component {
 		let films = this.state.films;
 		if (films === undefined) {
 			return <Redirect to="/pageNotFound" />;
-		} else {
+		} else if (films.id) {
 			return (
 				<div className="film-details-container">
 					<h1 className="details-header">{films.name}</h1>
@@ -44,6 +44,12 @@ export default class ScandiFilmDetails extends Component {
 					<Link to="/">
 						<h4>Back to home page</h4>
 					</Link>
+				</div>
+			);
+		} else {
+			return (
+				<div>
+					<h2>Please wait this page is still loading</h2>
 				</div>
 			);
 		}

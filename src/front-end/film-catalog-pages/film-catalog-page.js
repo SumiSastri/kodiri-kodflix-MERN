@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../../App.css';
 import '../../index.css';
 
-function FilmCatalog({ name, id, cover, country, description }) {
+function FilmCatalog({ id, cover, description }) {
 	return (
 		<Link to={`/${id}`} className="film-cover">
 			<img alt={'scandinavian-noir-film-cover'} src={cover} />
