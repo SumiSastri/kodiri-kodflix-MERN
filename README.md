@@ -1,7 +1,7 @@
-# Kodiri-Kodflix-MERN
-Table of Contents
+# Kodiri-Kodflix-ERN (Express-React-Node-Section 2)
 
-- Learing objectives
+Table of Contents
+- Learning objectives
 - What is the front-end
 - What is the back-end
 - How do the front-end and backe-end communicate?
@@ -11,9 +11,20 @@ Table of Contents
 - ES-6 Promises vs. CallBacks
 - ES-8 Async Await
 - API's REST vs. SOAP
+- What is the MEAN-MERN Stack
+- What is node?
+- What is express?
+- What is nodemon?
+- What are Axios/ Superagent?
+- Node vs. Yarn which is better?
+
+Challenges 19-26 - How to Guide
 
 ## Learning Objectives
-Client-server request-response cycle - connecting the backend to the frontend.
+
+The Kodflix project has been split into 3 sections - Section 1 - deploying with front-end data/ This is Section 2 - deploying with data in a node file. Section 3 - moves the data to a cloud based MongoDB schema.
+
+At this stage my focus was to understand how the backend and frontend data connected and were configured - both in theory and practice
 
 #### What is the front-end?
 
@@ -32,47 +43,6 @@ In the front end data that have limited security risks are stored -  cookies/ au
 HTTP (hyper-text-transfer-protocol) is the protocol, standards or rules that connect the front-end(client-side) to the back-end (server-side).  HTTPS (hyper-text-transfer-protocol-secure) - encrypts the client-service request-response for enhanced security. This is done via an encryptation layer using SSL (secure sockets layer) or TLS (Transport Layer Security)
 
 HTTP & HTTPS enable documents to be transported to and from browsers and back-end databases. It is the basis of data-exchange on the web. The browser (client) sends a request to the server (where documents are hosted) and the server sends a response. The request-response pattern (which is based on  a set of rules, standards or protocols) is the language of communicaton between client (browser, front-end) and server (back-end, databases). 
-
-*  How do REQUESTS work?
-- Via methods - GET, POST, PUT, DELETE.
-GET - get documents and files from the server
-POST - Post the data from the browser to the database in the server
-PUT - Update the data from the browser with the new information in the server
-DELETE - Delete the information sent from the browser in the database
-
-- Via query-strings - after the URL with a question mark, there are query string parameters in key-value pairs
-
-- Via the body of the request - you can see the request headers are encoded in the headers tab in network but you can still see all the data in the body of the request in the browser
-
-- Via encrypted - HTTPS requests - only client-server share information in a secure way
-
-* How do RESPONSES work
-
-- Debugging 
-To see this request-response pattern in the console, you can go to the "Network" tab.
-- GO TO Server Status
-The response that the server sends back is the HTTP server status messages 
-Documentation [https://www.w3schools.com/tags/ref_httpmessages.asp]
-100 series - information [ 100 continue - server has received headers, send the request body, 101 request to switch protocols from requester, 103 resume aborted PUT or POST requests]
-200 series - success messages [ 200 successful response, 201 new resource created, 202, request accepted for processing - processing not completed]
-300 series - redirects [307 temporary redirect, 301 moved permanently]
-400 series - client errors messages from browser (404 not found, 403 forbidden, 401 unathorised)
-500 series - server errors messages from servers [500 internal server error, 502 bad gateway, 504 gateway timeout]
-
-- GO TO  Headers
- - request url
- - request method
- - server status dode
- - remote (IP) address
- - response headers - content type
- - request headers 
-
-- GO TO Response  - you can see the document type and the body of the request sent in HTTP this is open and visible to anyone who looks at the network tab, therefore sensitive information now is only sent via HTTPS requests
-
-* More resources:
-
-MDN documentation[https://developer.mozilla.org/en-US/docs/Learn/Common_questions/How_does_the_Internet_work] 
-A good YouTube Video:  [https://www.youtube.com/watch?v=7_LPdttKXPc]
 
 The backend (server side) depends on API's to run HTTP requests from databases that are written in a plurality of languages (PHP, Scala, Go-Lang, Python). Client requests are with three key languages - HTML,CSS and JavaScript. For these languages to be understood by the front-end (client-side). 
 
@@ -218,13 +188,11 @@ Instead of writing code in nodes in the document, express methods help route res
 This backend routing of the data happens through API calls and routing of URLs that are not visible to the end-user.
 
 Documentation [https://expressjs.com/en/4x/api.html#app]
-
 Reading-list:
 [https://jilles.me/getting-the-express-app-js/]
 [https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4]
 [https://jilles.me/express-routing-the-beginners-guide/]
 [https://expressjs.com/en/guide/routing.html]
-
 
 #### What is Axios and Superagent?
 The two most popular options for making AJAX request with React are Fetch and Axios. As React does not have Ajax to use promises in React you need to install axios [npm install axios]
@@ -687,97 +655,3 @@ So check your package JSOn at this stage it should look like this
 }
 ```
 You are now ready to deploy OR set up the MongoDb database - challenge 26
-
-#### Challenge -26 set up MongoDb and move your data from the node module to a cloud-based database
-
-## Appendicies 
-
-#### Appendix -1: How to set up a project with npm webpack build
-Instead of npx create reactapp [appname] Web pack project set up 
-If you install a package that you do not require [npm uninstall <package name>]
-1.  [npm init] [yarn init] (this initializes npm. The password & other prompts are invisible, hit return on all compilers).  
-2.  [npm install web-pack webpack-cli webpack-dev-server html-webpack-plugin –D] (installs webpack) 
-3.  [npm install babel-loader style-loader css-loader sass-loader –D] (installs babel, css and sass pre-compilers or loaders)
-4.  [npm install @babel/core @babel/preset-env –D] (installs the babel & env files - babel transpiles jsx into es6)
-5   [npm install dotenv-webpack –D] (installs the env files and webpack)
-
-Add the project files outside src folder
-1. [touch .babelrc] (creates a babel file in project)
-2. [touch webpack.config.js] (in the main file not in the src file)
-3. [touch .env] (creates an env. file in project)
-
-Add the source directory file and project files - structure src files according to project needs
-1.   [mkdir src] (makes directory called source)
-2.   [touch src/index.html src/app.js src/style.scss] (makes files for html, css and vanilla js) 
-
-Add front-end libraries you might want [npm install <library name> -S]1. [npm install mapbox-gl –S] (installs mapbox)
-2. [npm install bulma –S] installs bulma (as a project dependency not a compiler only a library)
-3. [npm install node-sass –D] (installs sass - as a dev dependency as it is a complier)
-4. [npm i jquery –S] (installs j-query)
-5. [npm install react react-dom -S] (installs react and react dom)
-6. [npm i react-router-dom –S] (installs the router component of react) 
-
-Add backend dependencies and libraries
-1. [npm install nodemon] (adds hot loading of backend server with nodemon)
-2. [npm install node]  (adds node.js)
-3. [npm install express] (install express.js midware that runs data from server via axios to Postman/ Insomnia)
-4.  [npm add axios] (installs axios runner from backend with JSON files to Insomnia or Postman Axios no need to install body-parser any more, it comes inbuilt)
-5. [npm install request-promise] [npm install request] (sets up back end API to get methods of request-promise from ES-6
-6.[npm install mongoose] (adds mongoose.js to set up MongoDB Schemas)
-
-#### Appendix-2 Some common CLI commands in yarn vs. npm
-
-- [yarn add] [npm install] - (installs the package required on a project)
-- [npm uninstall i](uninstall if the package not installed correctly)
-- [yarn global add] [npm install global] (installs the package required on your OS)
-- [yarn add node] -(installs node which it runs off)
-- [yarn] [npm] start - (starts dev server)
-- [yarn] [npm] run build - (builds static files for deployment [heroku] or other deployment packages)
-- [yarn] [npm] test - (starts test runner)
-- [yarn]/[npm] run eject - (IMPORTANT NO ROLL BACK -- removes the app and copies build dependencies, config files and scripts into the app directory)
-- [npm update] - (updates packages)
-- [npm outdated] (checks for outdated packages)
-- [yarn run start backend]/ [yarn start:server]/ [npm run start backend]
-- CLI documentation
-
-[npm] CLI documentation link [https://docs.npmjs.com/cli-documentation/cli] 
-[yarn] CLI documentation [https://yarnpkg.com/lang/en/docs/cli/]
-
-#### Appendix -3: - my notes on CRUD
-
-CREATE ONE NEW - POST -201 
-createRoute is the function (Create) GET
-Status is 201
-Export the route 
-Catch the error
-In the config create the router set up
-Then go to Insomnia (or your base url path)
-Do a post request
-Create the new animal object
-Send
-Booleans and numbers do not need inverted commas and boolean is lowercase
-Create is a get request and a post
-
-SHOW ONE - WITH ID - GET REQUEST - 200
-showRoute() is the function
-Show - get request and a post (Request and Show)
-Status is 200 (ok)
-Get the id
-.findById(req.params.id) you do not the the exact id because you have already clocked them in other pathways
-You need base_url/api/animals/5c87a2839f9ea114c58d524c
-For all the id requests in router
-router.route('/animals/:id')
-  .get(animals.show)
-
-
-EDIT AND UPDATE   - PUT 202
-Find by Id and update one
-In Insomnia - create object and only update key:value required to update
-
-
-FIND  AND DELETE   - DELETE 204
-Find by Id and delete one
-Blow up one (by Id) Blow up all (Delete)
-In Insomnia - remove all info and send
-
-
