@@ -4,7 +4,7 @@ Table of Contents
 - Learning objectives
 - What is the front-end
 - What is the back-end
-- How do the front-end and backe-end communicate?
+- How do the front-end and back-end communicate?
 - What is JSON
 - What is Ajax & async JavaScript
 - What is the JavaScript Event Loop
@@ -76,7 +76,7 @@ Edureka has a good video worth watching[https://www.youtube.com/watch?v=uw_rP5bV
 
  For more detail on the event-loop, MDN documentation [https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop]
 
-### What is Ajax and async JavaScript?
+#### What is Ajax and async JavaScript?
 
 Ajax was created by google to allow you to make a get request (client-side) which is sent to back-end servers. The server sends back a response but instead of loading everything at the same time, a code block is run on load, and assigns only those elements that need to be re-rendered) without reloading the page whole page while data (or the payload) is sent in the background.  It is a combination of tools and is mainly accessed via the global ```fetch```method in browsers.
 
@@ -107,7 +107,7 @@ Promises take 2 arguments ```return new Promise (resolve, reject)``` followed by
 
 Async await is built on top of promises - it makes promises look like synchronous code. As JavaScript is now used both in the back-end and front-end, it helps server-side and client-side developers understand the code base. There are two key words ```async``` and ```await``` it is syntactic sugar over promises. 
 
-#### SOAP vs. REST?
+#### SOAP vs. REST?
 
 SOAP is an acryonym for Simple Object Access Protocol while REST is an acryonynm for Representational State Transfer (REST). Both are Application Protocol Interfaces that enter into the cycle of calling, posting, updating and deleting data during the client-server request-response cyle is also called the CRUD cycle - Create, Read, Update, Delete. 
 
@@ -135,7 +135,7 @@ Restful-React - As React defines itself as a front-end library, it allows users 
 
 Read More on API's and MVC [https://www.codecademy.com/articles/what-is-rest] [https://www.codecademy.com/articles/mvc]
 
-### What is the MEAN-MERN stack?
+#### What is the MEAN-MERN stack?
 
 A stack is a collection of technologies used to run an app. The MEAN stack and MERN stack are an end-to-end javascript collection of technologies used to build apps using the Mongo database and mongoose.js/ express.js as a runner,  angular.js or react.js for the front-end ui-ux and node.js to connect the Mongo database to the front-end libraries.
 
