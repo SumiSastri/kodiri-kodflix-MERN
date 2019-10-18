@@ -14,7 +14,6 @@ export default class FilmCatalogGallery extends Component {
 		fetch('/api/films-data')
 			.then((res) => res.json())
 			.then((filmsBackend) => {
-				//  or test by slowing down speed of the network to slow 3G
 				this.setState({ filmsBackend });
 			})
 			.catch((error) => console.log(error));

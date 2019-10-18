@@ -14,7 +14,6 @@ export default class ScandiFilmDetails extends Component {
 		fetch('/api/films-data')
 			.then((res) => res.json())
 			.then((filmsBackend) => {
-				console.log(filmsBackend);
 				let filmId = this.props.match.params.filmId;
 				let films = filmsBackend.find((films) => films.id === filmId);
 				this.setState({ films: films });
@@ -55,6 +54,7 @@ export default class ScandiFilmDetails extends Component {
 				<div>
 					<h2>Please wait this page is still loading</h2>
 				</div>
+				//  test loading by slowing down speed of the network to slow 3G
 			);
 		}
 	}
