@@ -31,7 +31,7 @@ but what (or who) is the prey?`,
 		{
 			id: 'girl-with-dragon-tattoo-film',
 			name: 'the-girl-with-the-dragon-tattoo',
-			cover: 'girl-with-the-dragon-tatoo-film',
+			cover: 'girl-with-the-dragon-tattoo-film',
 			description: `What happens when a journalist, computer hacker and
 		sadist's fates are entagled with each other?`,
 			country: 'Sweden',
@@ -85,7 +85,7 @@ but what (or who) is the prey?`,
 			name: 'dicte-film',
 			description: `A divorced journalist goes back to her home town to make peace with her past, but
 		things take an ugly turn`,
-			cover: 'dicte',
+			cover: 'dicte-film',
 			country: 'Denmark',
 			review: `The series is named for the title character, Dicte Svendsen, played by Iben Hjejle. 
 			Dicte is a crime reporter who goes back to her hometown of Aarhus after a divorce.  
