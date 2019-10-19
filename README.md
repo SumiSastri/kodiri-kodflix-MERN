@@ -18,7 +18,16 @@ Table of Contents
 - What are Axios/ Superagent?
 - Node vs. Yarn which is better?
 
-Challenges 19-26 - How to Guide
+Challenges 18-26 - How to Guide
+
+Challenge 18 - clean up folder structure
+Challenge 19 - add node and express
+Challenge 20 - add nodemon
+Challenge 21 - set up server and check data flows
+Challenge 22, 24 , 25 - render all pages with back-end data
+Challenge 23 - set up back end server for deploy with build files
+Redeploy to Heroku with node-based data
+Challenge 26 - install MongoDb - Section 3 files
 
 ## Learning Objectives
 
