@@ -166,6 +166,8 @@ It is more scalable than Rails (Ruby) which can not shuffle around data quickly 
 
 Node is largely used to limit the languages that a team uses to JavaScript, hence making teams cross-functional - this is not possible if the backend is run on php, Scala, java and other non-js languages.
 
+The key way to use node is with common.js and the require function - this method imports a module or file as an object into another file. Data files created in javascript can be imported with the require method into express and then used for routing API calls. 
+
 Node & Express are not good for CPU heavy applications. 
 
 Node Documentation [https://nodejs.org/en/docs/guides/getting-started-guide/]
@@ -179,6 +181,7 @@ Good articles to read to understand how and why you would use Node.js as the bac
 Express.js forms part of the middle-ware between the backend server and the front-end ui-ux. 
 
 Just as React is a library that manages browser-based data in state/ ui-ux changes and DOM manipulation, Express is a frame-work that manages requests from the servers' databases to the front-end.
+
 
 Express comes with it's own syntax and methods. It is a protocol and has a more rigid structure but is lightweight and very quick to set up. The basic code for set up to test the server is working is below.
 
@@ -199,9 +202,10 @@ This backend routing of the data happens through API calls and routing of URLs t
 Documentation [https://expressjs.com/en/4x/api.html#app]
 Reading-list:
 [https://jilles.me/getting-the-express-app-js/]
-[https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4]
-[https://jilles.me/express-routing-the-beginners-guide/]
-[https://expressjs.com/en/guide/routing.html]
+[https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4] Express 4.0
+[https://jilles.me/express-routing-the-beginners-guide/] & [https://jilles.me/getting-the-express-app-js/] 
+[https://expressjs.com/en/guide/routing.html] Documentation 
+Express router documentation [https://expressjs.com/en/4x/api.html#router]
 
 #### What is Axios and Superagent?
 The two most popular options for making AJAX request with React are Fetch and Axios. As React does not have Ajax to use promises in React you need to install axios [npm install axios]
@@ -596,15 +600,15 @@ const express = require('express');
 const app = express();
 // creates 3001 for backend and 3000 for FE
 const port = process.env.PORT || 3001;
-// imports path module to run static files from server to client
+// imports path module to run both static and dynamic files
 const path = require('path');
 // imports node module from films-data file
-const films = require('./api-filmsData');
+const getFilmData = require('./api-filmsData');
 // Sends object films.filmsData as a payload via the node module from the api file as filmsData
-app.get('./api-filmsData/filmsData', (req, res) => res.send(films.filmsData));
-// uses static files, routes joins them as one for deploy
+app.get('/api/films-data', (req, res) => res.send(getFilmData()));
+// once the run build is run in public files are created in build, the static files are joined to this file
 app.use(express.static(path.join(__dirname, '../../build')));
-// gets static files and sends them to the root - index.html - from a file path after build
+// gets the static css and javascript files and sends them to the root - index.html  
 app.get('*', function(req, res) {
 	res.sendFile(path.join(__dirname, '../../build', 'index.html'));
 });
