@@ -27,7 +27,7 @@ Challenge 21 - set up server and check data flows
 Challenge 22, 24 , 25 - render all pages with back-end data
 Challenge 23 - set up back end server for deploy with build files
 Redeploy to Heroku with node-based data
-Challenge 26 - install MongoDb - Section 3 files
+Challenge 26 - install MongoDb
 
 ## Learning Objectives
 
@@ -668,3 +668,74 @@ So check your package JSOn at this stage it should look like this
 }
 ```
 You are now ready to deploy OR set up the MongoDb database - challenge 26
+
+#### Challenge -26 MongoDb set up
+
+If you don't have Homebrew, install it - steps to install HomeBrew. Homebrew is a package manager for OS X.
+Packages are bundles of source code distributed by developers of software, which can be compiled and installed on your machine.
+
+1. Copy and paste the following command into the terminal, then hit enter
+  ```
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  ```
+2. Press `enter` at the prompt, and enter your password.
+3. Once installation has finished type `brew doctor`. It should say `Your system is ready to brew.` If not inform one of your instructors.
+4. Update Homebrew: `brew update`
+
+<br>
+
+You are now ready to install mongo with Node. It's a non-relational (noSQL) database. 
+Install the community version the steps recommend installing it with homebrew
+If you get stuck documentation [https://www.mongodb.com/download-center/community]
+
+Install it with `homebrew`:
+
+``` sh
+brew install mongodb
+```
+The program is saved by default in the file path /usr/local/var/mongodb
+Run the following command to ensure you have a place for mongo to store the data for your databases:
+
+``` sh
+sudo mkdir -p /data/db && sudo chown -R $(whoami)/data/db
+note: whoamI is not a place holder it finds you from your users directory
+
+OR
+
+sudo mongod --dbpath /Users/your_name_placeholder/data/db
+note: here Users is casesensitive and your name is a placeholder
+
+```
+To check everything is working type `mongod` in the terminal. It will print a lot of stuff on the screen. After a few moments you should see this line at the bottom:
+
+```
+I NETWORK [thread1] waiting for connections on port 27017
+```
+
+If you get a socket in use error code 100 Catalina update stack overflow guidance [https://stackoverflow.com/questions/47975929/socketexception-address-already-in-use-mongodb]
+
+Here are some Catalina installation challenges - questions answered
+[https://stackoverflow.com/questions/58283257/mongodb-doesnt-work-on-latest-mac-os10-15]
+Here is a reddit thread
+[https://www.reddit.com/r/mongodb/comments/d7takd/macos_x_catalina_105_beta_and_mongo_a_warning/]
+
+
+Now that you have your database up and running - create a Db for Kodflix.
+
+In the terminal [use dbName]
+You will get a prompt [switched to dbName] - the name of the db yo uhave just created
+In terminal now initialise your db as the user using this command
+```
+db.createUser({ user: 'dbName', pwd: 'dbName', roles: [ "readWrite", "dbAdmin" ] })
+```
+You have now created yourself as the new user of this db.
+
+To visualise the data download Robot3T now called RoboMongo, Studio3T is free for 30 days, while Robot3T is free forever
+
+Once downloaded you will find your Db in Robot 3T
+
+Go to File -> Connect... and then click on Create (this is at the top of the tool bar not at the bottom as a button do not click connect)
+Once you click create - On the first tab (Connection) just type the name of the connection. That's not important, but, for consistency reasons, let's call it kodflix. Leave everything else default. On the second tab(Authentication)  enable perform authentication and type kodflix -tick the box and use kodflix as the username, password once again for consistency. Click the button test the modal should show the port and authentication working. Now save your db is connected.
+
+
+#### Challenge -27 MongoDb set up
