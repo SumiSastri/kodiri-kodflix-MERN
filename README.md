@@ -1,23 +1,5 @@
 # Kodiri-Kodflix-ERN (Express-React-Node-Section 2)
 
-Table of Contents
-- Learning objectives
-- What is the front-end
-- What is the back-end
-- How do the front-end and back-end communicate?
-- What is JSON
-- What is Ajax & async JavaScript
-- What is the JavaScript Event Loop
-- ES-6 Promises vs. CallBacks
-- ES-8 Async Await
-- API's REST vs. SOAP
-- What is the MEAN-MERN Stack
-- What is node?
-- What is express?
-- What is nodemon?
-- What are Axios/ Superagent?
-- Node vs. Yarn which is better?
-
 Challenges 18-26 - How to Guide
 
 Challenge 18 - clean up folder structure
@@ -45,49 +27,49 @@ Today front-end browsers are in many client devices - phone, tablet, computer sc
 
 Backend refers to the data, logic that the user does not see. This data is stored on non-client side devices - the cloud, physical servers and other remote devices that are not linked to front-end client-side devices (phones, tablets, computers, wristwatches, etc.)
 
-In the front end data that have limited security risks are stored -  cookies/ authentication codes, etc. User data -  personal details of users, IP-protected code-bases, etc., are stored securely in non-client devices like servers or local storage in the backend. When there is data that needs to be stored securely and when there are CPU-heavy data (videos, image-manipulation, etc.) is better stored on the backend.
+In the front end data that have limited security risks are stored - cookies/ authentication codes, etc. User data - personal details of users, IP-protected code-bases, etc., are stored securely in non-client devices like servers or local storage in the backend. When there is data that needs to be stored securely and when there are CPU-heavy data (videos, image-manipulation, etc.) is better stored on the backend.
 
 #### How do the front-end and back-end communicate? Client-Server API communication
 
-HTTP (hyper-text-transfer-protocol) is the protocol, standards or rules that connect the front-end(client-side) to the back-end (server-side).  HTTPS (hyper-text-transfer-protocol-secure) - encrypts the client-service request-response for enhanced security. This is done via an encryptation layer using SSL (secure sockets layer) or TLS (Transport Layer Security)
+HTTP (hyper-text-transfer-protocol) is the protocol, standards or rules that connect the front-end(client-side) to the back-end (server-side). HTTPS (hyper-text-transfer-protocol-secure) - encrypts the client-service request-response for enhanced security. This is done via an encryptation layer using SSL (secure sockets layer) or TLS (Transport Layer Security)
 
-HTTP & HTTPS enable documents to be transported to and from browsers and back-end databases. It is the basis of data-exchange on the web. The browser (client) sends a request to the server (where documents are hosted) and the server sends a response. The request-response pattern (which is based on  a set of rules, standards or protocols) is the language of communicaton between client (browser, front-end) and server (back-end, databases). 
+HTTP & HTTPS enable documents to be transported to and from browsers and back-end databases. It is the basis of data-exchange on the web. The browser (client) sends a request to the server (where documents are hosted) and the server sends a response. The request-response pattern (which is based on a set of rules, standards or protocols) is the language of communicaton between client (browser, front-end) and server (back-end, databases).
 
-The backend (server side) depends on API's to run HTTP requests from databases that are written in a plurality of languages (PHP, Scala, Go-Lang, Python). Client requests are with three key languages - HTML,CSS and JavaScript. For these languages to be understood by the front-end (client-side). 
+The backend (server side) depends on API's to run HTTP requests from databases that are written in a plurality of languages (PHP, Scala, Go-Lang, Python). Client requests are with three key languages - HTML,CSS and JavaScript. For these languages to be understood by the front-end (client-side).
 
 The process of converting the data in javascript from a backend database in a language that is not javascript is done through JSON - javascript object notation.
 
 #### What is JSON?
 
-JSON is a lightweight store of data into text so that HTTP calls can be made, parsed (interpreted) by browsers and sent back to databases. As it is a text-based format it is lightweight.  It is then  reconverted back into the format that the database requires. It therefore stores and transports data quickly and efficiently. Compared to XML parsing, JSON is less verbose. JSON uses less data overall so reduces cost and increases parsing speed. 
+JSON is a lightweight store of data into text so that HTTP calls can be made, parsed (interpreted) by browsers and sent back to databases. As it is a text-based format it is lightweight. It is then reconverted back into the format that the database requires. It therefore stores and transports data quickly and efficiently. Compared to XML parsing, JSON is less verbose. JSON uses less data overall so reduces cost and increases parsing speed.
 
-The way that JavaScript is converted into JSON is to intatiate a JavaScript object to a variable. This object is then assigned to the method  ```JSON.parse()```. The method, parses the JavaScript object and convert this JavaScript Object (front-end, client-side language) into Java Script Obect Notation(JSON). The converted object to JSON is sent server-side: Note the syntax to convert a JS object into JSON-
+The way that JavaScript is converted into JSON is to intatiate a JavaScript object to a variable. This object is then assigned to the method `JSON.parse()`. The method, parses the JavaScript object and convert this JavaScript Object (front-end, client-side language) into Java Script Obect Notation(JSON). The converted object to JSON is sent server-side: Note the syntax to convert a JS object into JSON-
 
-```const objectName = JSON.parse ('{"name":Kodflix", "description":"some description"})'```
+`const objectName = JSON.parse ('{"name":Kodflix", "description":"some description"})'`
 
-The backend now gets a JSON request. JSON is read and the response method used in the back-end code should convert the body of the response first into text then into JSON response with the  ```JSON.stringify()``` method. The backend data is converted into text and intatiated to a variable that is the new response payload (data) which is text that needs to be converted back into JSON. JSON is then 
+The backend now gets a JSON request. JSON is read and the response method used in the back-end code should convert the body of the response first into text then into JSON response with the `JSON.stringify()` method. The backend data is converted into text and intatiated to a variable that is the new response payload (data) which is text that needs to be converted back into JSON. JSON is then
 
-```const convertToJSON = JSON.stringify({name: 'Kodflix', id: 1})```
+`const convertToJSON = JSON.stringify({name: 'Kodflix', id: 1})`
 
-Note the JSON vs JavaScript object syntax. JavaScript the name value pair, only if the value is a string is it in quotes, however with JSON both the name and value are in strings. JSON objects both the name and value pair are enclosed in quotes, to denote both are strings. 
+Note the JSON vs JavaScript object syntax. JavaScript the name value pair, only if the value is a string is it in quotes, however with JSON both the name and value are in strings. JSON objects both the name and value pair are enclosed in quotes, to denote both are strings.
 
-However, there are also similarties -  curly-braces hold the values of an object, square-braces hold the values of arrays.
+However, there are also similarties - curly-braces hold the values of an object, square-braces hold the values of arrays.
 
 To visualise JSON better - add the Chrome Extension JSONView
 
 Edureka has a good video worth watching[https://www.youtube.com/watch?v=uw_rP5bV9r0] for a more detailed understanding.
 
- #### What is the JavaScript event-loop?
- 
- Node and express provide an event-driven architecture for apps and projects. An event is a series of occurences driven by changes on the frontend. Events build up in the task queue and are executed by parsers (both in the front-end and back-end).
+#### What is the JavaScript event-loop?
 
- As javascript is a single-threaded non-blocking code base, it is able to deal with multiple tasks on the task queue driven by events.
+Node and express provide an event-driven architecture for apps and projects. An event is a series of occurences driven by changes on the frontend. Events build up in the task queue and are executed by parsers (both in the front-end and back-end).
 
- For more detail on the event-loop, MDN documentation [https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop]
+As javascript is a single-threaded non-blocking code base, it is able to deal with multiple tasks on the task queue driven by events.
+
+For more detail on the event-loop, MDN documentation [https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop]
 
 #### What is Ajax and async JavaScript?
 
-Ajax was created by google to allow you to make a get request (client-side) which is sent to back-end servers. The server sends back a response but instead of loading everything at the same time, a code block is run on load, and assigns only those elements that need to be re-rendered) without reloading the page whole page while data (or the payload) is sent in the background.  It is a combination of tools and is mainly accessed via the global ```fetch```method in browsers.
+Ajax was created by google to allow you to make a get request (client-side) which is sent to back-end servers. The server sends back a response but instead of loading everything at the same time, a code block is run on load, and assigns only those elements that need to be re-rendered) without reloading the page whole page while data (or the payload) is sent in the background. It is a combination of tools and is mainly accessed via the global `fetch`method in browsers.
 
 React does not have its own in-built AJAX library.
 
@@ -95,32 +77,33 @@ Most server-side code is parsed synchronously - which means each thread executes
 
 These requests are sent as an event queue to the server side. JavaScript methods such as call back functions, promises, etc, allows the front-end call stack (requests in an event-queue) to handle all these requests and return in the response from the server side back to the client the elements that can be rendered quickly first while others that need more time to send the data later.
 
- Async javascript is used extensively in connecting the backend to front-end user interfaces and forms and important part in joining up the stack. It is specifically used for single-page-applications.
+Async javascript is used extensively in connecting the backend to front-end user interfaces and forms and important part in joining up the stack. It is specifically used for single-page-applications.
 
-Some other async methods are ```setState({]})``` event handlers ```onClick.()``` and ```setTimeOUt.()``` are some other examples.
+Some other async methods are `setState({]})` event handlers `onClick.()` and `setTimeOUt.()` are some other examples.
 
-For more on async javascript, callbacks, promises and recursion checkout Gray's Kodiri videos [https://www.youtube.com/watch?v=pX74__nD48I] [https://www.youtube.com/watch?v=F5XD1JNhkP8] [https://www.youtube.com/watch?v=PlhmNNNyYyogit]
+For more on async javascript, callbacks, promises and recursion checkout Gray's Kodiri videos [https://www.youtube.com/watch?v=pX74\_\_nD48I][https://www.youtube.com/watch?v=f5xd1jnhkp8] [https://www.youtube.com/watch?v=PlhmNNNyYyogit]
 
 #### ES-6 call-backs vs. Promises
 
 A call back is executed when one function calls another function. Map,filter and reduce are call-back functions. There is a synchronous nested functionality where one code block has to run before the other can be executed and can lead to what was known as "call-back-hell" or "the pyramid-of-doom". It was also dependent on several conditional statements
 
-Promises serve the same purpose as call-backs were created in ES-6 to solve the call-back-hell problem with using the constructor method  that takes two params - resolve and reject - the promise gets executed with a series of .then blocks that results in the promise ending with three states:-
+Promises serve the same purpose as call-backs were created in ES-6 to solve the call-back-hell problem with using the constructor method that takes two params - resolve and reject - the promise gets executed with a series of .then blocks that results in the promise ending with three states:-
+
 - Fulfilled
 - Rejected
 - Pending
 
-Promises take 2 arguments ```return new Promise (resolve, reject)``` followed by```.then()``` blocks
+Promises take 2 arguments `return new Promise (resolve, reject)` followed by`.then()` blocks
 
 #### ES-8 Async Await
 
-Async await is built on top of promises - it makes promises look like synchronous code. As JavaScript is now used both in the back-end and front-end, it helps server-side and client-side developers understand the code base. There are two key words ```async``` and ```await``` it is syntactic sugar over promises. 
+Async await is built on top of promises - it makes promises look like synchronous code. As JavaScript is now used both in the back-end and front-end, it helps server-side and client-side developers understand the code base. There are two key words `async` and `await` it is syntactic sugar over promises.
 
 #### SOAP vs. REST?
 
-SOAP is an acryonym for Simple Object Access Protocol while REST is an acryonynm for Representational State Transfer (REST). Both are Application Protocol Interfaces that enter into the cycle of calling, posting, updating and deleting data during the client-server request-response cyle is also called the CRUD cycle - Create, Read, Update, Delete. 
+SOAP is an acryonym for Simple Object Access Protocol while REST is an acryonynm for Representational State Transfer (REST). Both are Application Protocol Interfaces that enter into the cycle of calling, posting, updating and deleting data during the client-server request-response cyle is also called the CRUD cycle - Create, Read, Update, Delete.
 
-API's call the data from the database, posts this data on the web-page, updates the data that it receives from the front-end, sends it back to the backend and saves it or if it is not needed the data is deleted. 
+API's call the data from the database, posts this data on the web-page, updates the data that it receives from the front-end, sends it back to the backend and saves it or if it is not needed the data is deleted.
 
 SOAP, initially created by Microsoft, is a more rigid way of accessing databases. SOAP relies on XML calls while REST on JSON. SOAP works better with legacy systems such as the Distributed Component Object Model (DCOM) and Common Object Request Broker Architecture (CORBA).
 
@@ -142,15 +125,15 @@ A good blog to read [https://smartbear.com/blog/test-and-monitor/understanding-s
 
 Restful-React - As React defines itself as a front-end library, it allows users to figure out what works best for the app - this provides building blocks and flexiblity it also means that there are no protocols to follow, it does not prescribe how REST API's should be created.
 
-Read More on API's and MVC [https://www.codecademy.com/articles/what-is-rest] [https://www.codecademy.com/articles/mvc]
+Read More on API's and MVC [https://www.codecademy.com/articles/what-is-rest][https://www.codecademy.com/articles/mvc]
 
 #### What is the MEAN-MERN stack?
 
-A stack is a collection of technologies used to run an app. The MEAN stack and MERN stack are an end-to-end javascript collection of technologies used to build apps using the Mongo database and mongoose.js/ express.js as a runner,  angular.js or react.js for the front-end ui-ux and node.js to connect the Mongo database to the front-end libraries.
+A stack is a collection of technologies used to run an app. The MEAN stack and MERN stack are an end-to-end javascript collection of technologies used to build apps using the Mongo database and mongoose.js/ express.js as a runner, angular.js or react.js for the front-end ui-ux and node.js to connect the Mongo database to the front-end libraries.
 
 The MEAN/MERN stack are a network of applications based on javascript that communicate through the network front-end - midware - backend fluidly. It is often a preferred option for start-ups as fewer language specialisations are required in the dev team.
 
-* The advantages of MEAN/ MERN- (Mongo-Express-Angular (or React)-Node) stack with javascript read: [https://www.toptal.com/javascript/guide-to-full-stack-javascript-initjs] The stack has a robust architecture for small apps, and comes inbuilt with Jestfor  unit testing, if you are using React. The article suggests using gulp for automated build tasks and brackets for full text coding. Server side componentization often done with Docker can be achieved with express.js or connect.js.
+- The advantages of MEAN/ MERN- (Mongo-Express-Angular (or React)-Node) stack with javascript read: [https://www.toptal.com/javascript/guide-to-full-stack-javascript-initjs] The stack has a robust architecture for small apps, and comes inbuilt with Jestfor unit testing, if you are using React. The article suggests using gulp for automated build tasks and brackets for full text coding. Server side componentization often done with Docker can be achieved with express.js or connect.js.
 
 #### What is node.js?
 
@@ -166,22 +149,22 @@ It is more scalable than Rails (Ruby) which can not shuffle around data quickly 
 
 Node is largely used to limit the languages that a team uses to JavaScript, hence making teams cross-functional - this is not possible if the backend is run on php, Scala, java and other non-js languages.
 
-The key way to use node is with common.js and the require function - this method imports a module or file as an object into another file. Data files created in javascript can be imported with the require method into express and then used for routing API calls. 
+The key way to use node is with common.js and the require function - this method imports a module or file as an object into another file. Data files created in javascript can be imported with the require method into express and then used for routing API calls.
 
-Node & Express are not good for CPU heavy applications. 
+Node & Express are not good for CPU heavy applications.
 
 Node Documentation [https://nodejs.org/en/docs/guides/getting-started-guide/]
 
 Good articles to read to understand how and why you would use Node.js as the backend server
-* Netgurus guide [https://www.netguru.com/blog/use-node-js-backend] a good pdf that can be downloaded is on the website
-* Why use Node - Medium blog [https://medium.com/the-node-js-collection/why-the-hell-would-you-use-node-js-4b053b94ab8e]
+
+- Netgurus guide [https://www.netguru.com/blog/use-node-js-backend] a good pdf that can be downloaded is on the website
+- Why use Node - Medium blog [https://medium.com/the-node-js-collection/why-the-hell-would-you-use-node-js-4b053b94ab8e]
 
 #### What is express.js?
 
-Express.js forms part of the middle-ware between the backend server and the front-end ui-ux. 
+Express.js forms part of the middle-ware between the backend server and the front-end ui-ux.
 
 Just as React is a library that manages browser-based data in state/ ui-ux changes and DOM manipulation, Express is a frame-work that manages requests from the servers' databases to the front-end.
-
 
 Express comes with it's own syntax and methods. It is a protocol and has a more rigid structure but is lightweight and very quick to set up. The basic code for set up to test the server is working is below.
 
@@ -201,13 +184,12 @@ This backend routing of the data happens through API calls and routing of URLs t
 
 Documentation [https://expressjs.com/en/4x/api.html#app]
 Reading-list:
-[https://jilles.me/getting-the-express-app-js/]
-[https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4] Express 4.0
-[https://jilles.me/express-routing-the-beginners-guide/] & [https://jilles.me/getting-the-express-app-js/] 
-[https://expressjs.com/en/guide/routing.html] Documentation 
+[https://jilles.me/getting-the-express-app-js/][https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4] Express 4.0
+[https://jilles.me/express-routing-the-beginners-guide/] & [https://jilles.me/getting-the-express-app-js/][https://expressjs.com/en/guide/routing.html] Documentation
 Express router documentation [https://expressjs.com/en/4x/api.html#router]
 
 #### What is Axios and Superagent?
+
 The two most popular options for making AJAX request with React are Fetch and Axios. As React does not have Ajax to use promises in React you need to install axios [npm install axios]
 
 Axios is like Ajax and you can use ES-6 promises with Axios in React.
@@ -226,22 +208,25 @@ They are different from operating system package managers, such as Brew. Brew al
 - My preference is npm - after using yarn as it is signifcantly faster, updates to yarn cause conflicts in installation. I had a lot of problems and have globally uninstalled yarn
 
 Yarn takes up a lot of disk space, but is faster, manages licences better however, the disc usage space vs efficiency npm considered the better option
+
 - npm is a better package to manage dependencies as sends usage details back to Facebook - yarn official stance is that this is not accurate information
 - npm is written all in lower case node package manager installation is sequentially
 - yarn uses all of the npm packages it is only a different installation process - using cloudflare, multiple installations happen at the same time
 
 - Conflicts
-If npm-run-all does give you trouble, which it shouldn't, you could consider installing yarn-run-all
-Using both at the same time creates conflicts so use one or the other in the CLI for your project 
+  If npm-run-all does give you trouble, which it shouldn't, you could consider installing yarn-run-all
+  Using both at the same time creates conflicts so use one or the other in the CLI for your project
 
-- Good articles to read to compare the two package managers:- 
+- Good articles to read to compare the two package managers:-
+
 * Installation and use [https://www.positronx.io/yarn-vs-npm-best-package-manager/]
 * Which is better - op-ed[https://blog.risingstack.com/yarn-vs-npm-node-js-package-managers/]
 * Scotch[https://scotch.io/tutorials/yarn-package-manager-an-improvement-over-npm]
 * Keycdn (almost the same as scotch.io) [https://www.keycdn.com/blog/npm-vs-yarn]
 
 #### What is nodemon?
-Nodemon hot loads the back end server so you do not need to run commands such as  ```node src/backend/app.js``` (used in this project).
+
+Nodemon hot loads the back end server so you do not need to run commands such as `node src/backend/app.js` (used in this project).
 Check in your package-JSON for the install and read documentation [https://github.com/remy/nodemon] which helps bug fixing if you encounter challenges hot-loading.
 
 # HOW TO GUIDE - CHALLENGES 18 TO 30
@@ -249,7 +234,7 @@ Check in your package-JSON for the install and read documentation [https://githu
 ##### Challenge -18 Setting up the backend server with node and express
 
 Change the folder structure once you need data in the back end.
- 
+
 Move all your files into 2 separate categories - FE (Front-end) and BE (Backend).
 
 In the FE src folder - move all the components created and their folders
@@ -266,36 +251,38 @@ Reconfigure project files with 2 source folders one for the frontend and one for
 Install node and express in the project and check package-json to ensure they are added as dev-dependencies.
 
 [yarn init] (intialise the project)
-[yarn add node -S] [npm install node]
-[yarn add express] [npm install express -S](install express midware that runs data from server via axios to Postman/ Insomnia)
+[yarn add node -S][npm install node]
+[yarn add express][npm install express -s](install express midware that runs data from server via axios to Postman/ Insomnia)
 
 With node.js the import-export methods in react.js do not work as they work in different ways.
 
-With node.js, a node module, the method used is ```require``` once a module is described in the require method, it is assign it to a variable. Once the module is "required", or loaded, we can use the ```module.exports``` method.
+With node.js, a node module, the method used is `require` once a module is described in the require method, it is assign it to a variable. Once the module is "required", or loaded, we can use the `module.exports` method.
 
-Replace the ```export default function getFilms() { return [{}]}``` method which is react.js syntax with the node.js syntax.
+Replace the `export default function getFilms() { return [{}]}` method which is react.js syntax with the node.js syntax.
 
-There several methods you can use to fetch data and the syntax is described well in this article -  Read [https://www.openmymind.net/2012/2/3/Node-Require-and-Exports/]
+There several methods you can use to fetch data and the syntax is described well in this article - Read [https://www.openmymind.net/2012/2/3/Node-Require-and-Exports/]
 
 Notes on the above documentation:-
-In the data section the module you can write is fairly simple ```module.exports = function getFilmsData() {return {[{  }]}``` with the return statement returning an array of objects with your data enclosed.
+In the data section the module you can write is fairly simple `module.exports = function getFilmsData() {return {[{ }]}` with the return statement returning an array of objects with your data enclosed.
 
-In the app.js file the  ```app.get('path', function(request, response) { return response.send() })``` method, the first argument is the backend API url path you create. ```app``` refers to the express app that has been declared as a variable when you set up the backend server with express. The second argument is a call-back function that takes two arguements - request and response. The request is the information/data/ payload to the server. The call back function returns the ```response.send()``` method which returns the data/payload object ```(getfilmsData{})``` and returns the films data as an object from the server created in the node modeule via the ```module.exports``` function back to the user.
+In the app.js file the `app.get('path', function(request, response) { return response.send() })` method, the first argument is the backend API url path you create. `app` refers to the express app that has been declared as a variable when you set up the backend server with express. The second argument is a call-back function that takes two arguements - request and response. The request is the information/data/ payload to the server. The call back function returns the `response.send()` method which returns the data/payload object `(getfilmsData{})` and returns the films data as an object from the server created in the node modeule via the `module.exports` function back to the user.
 
-Written in ES6 ```app.get('/api/films-data', (req, res) => res.send(getFilmData()));``` the ```app.get()``` method can be written in one line with an implicit return in the call back function. Note the syntax as there are several call back parenthesis! The first from get, the second from req-re and the final one from the get data from the node files!
+Written in ES6 `app.get('/api/films-data', (req, res) => res.send(getFilmData()));` the `app.get()` method can be written in one line with an implicit return in the call back function. Note the syntax as there are several call back parenthesis! The first from get, the second from req-re and the final one from the get data from the node files!
 
-You need to have the backend server running so run ```node src/back-end/app.js``` and then check the path you have set up in the google chrome browser search bar  [3000/films/data] and the data should display on the screen. At this stage we have not changed the back-end port to 3001. It is better to call this server.js rather than app.js, but for this project at this stage I have not refactored and renamed.
+You need to have the backend server running so run `node src/back-end/app.js` and then check the path you have set up in the google chrome browser search bar [3000/films/data] and the data should display on the screen. At this stage we have not changed the back-end port to 3001. It is better to call this server.js rather than app.js, but for this project at this stage I have not refactored and renamed.
 
 You Tube tutorials to review at this stage really useful to get the concepts of node and modules - it gives you a good theoretical understanding of node. Mosh on node [https://www.youtube.com/watch?v=TlB_eWDSMt4]
 
 #### Challenge -20 Add nodemon
-Install nodemon [yarn add nodemon] to hot-load backend 
+
+Install nodemon [yarn add nodemon] to hot-load backend
 In package-json change the script files and direct backend script to the file path you have created in node.js
 
 ```
 "start-frontend": "react-scripts start",
 		"start-backend": "file-path",
 ```
+
 In the case of my app this is
 
 ```
@@ -306,19 +293,20 @@ In the case of my app this is
 
 #### Challenge -21 Create a client-side and server-side port in your local environment
 
-If you use yarn you can get stuck in this challenge -  read this section of the npm documentation [https://libraries.io/npm/yarn-run-all] and see the code block at the end for what your scripts file should look like.
+If you use yarn you can get stuck in this challenge - read this section of the npm documentation [https://libraries.io/npm/yarn-run-all] and see the code block at the end for what your scripts file should look like.
 
 Install run-all [npm install npm-run-all] as a dev dependency [yarn add run-all]
-This will allow you to run the ports for the frontend and backend servers in parallel, 
+This will allow you to run the ports for the frontend and backend servers in parallel,
 
-Read the documentation on ```npm -p``` and ```npm -s``` [https://www.npmjs.com/package/npm-run-all]
+Read the documentation on `npm -p` and `npm -s` [https://www.npmjs.com/package/npm-run-all]
 This highlights the difference between running the ports in sequence vs. in parallel.
 
 Check the update on package-json - rename the scripts to start-frontend and start-backend so that you have 2 separate commands to run when you run the run-all command in your terminal
 
-In app.js change the port for the backend to ```const port = 3001;```
+In app.js change the port for the backend to `const port = 3001;`
 
 Double check your scripts file - it should look like this with npm commands
+
 ```
 "start": "npm-run-all -s build start-backend",
 		"start-frontend": "react-scripts start",
@@ -326,7 +314,7 @@ Double check your scripts file - it should look like this with npm commands
 		"start-dev": "npm-run-all -p start-frontend start-backend",
 ```
 
-Go to your terminal and check that this works   [yarn run start-dev] or [yarn start-dev]  both should work, now check your two 2 servers 3000 and 3001 to ensure they are running at the same time.
+Go to your terminal and check that this works [yarn run start-dev] or [yarn start-dev] both should work, now check your two 2 servers 3000 and 3001 to ensure they are running at the same time.
 
 #### Challenge -22, 24 & 25 Link the client-side react app and server-side express app
 
@@ -382,9 +370,9 @@ export default class ScandiFilmDetails extends Component {
 
 5. Now state can be set to the films variable that has found the films.id from the node module - console.log(this.state) and check the data is flowing.
 
-6. You might get errors at this stage if you have not migrated your image data to the backend 
+6. You might get errors at this stage if you have not migrated your image data to the backend
 
-7. In the node module check the image prop ```cover: 'dicte-film',``` and check that the name of the image file corresponds ```src/front-end/assets/dicte-film.jpeg``` also check that all the files are either jpeg or svg or png - as mixed file extensions will not work. 
+7. In the node module check the image prop `cover: 'dicte-film',` and check that the name of the image file corresponds `src/front-end/assets/dicte-film.jpeg` also check that all the files are either jpeg or svg or png - as mixed file extensions will not work.
 
 8. Look at your render method now deconstruct and run a conditional render for mistypes to the page not found component.
 
@@ -404,7 +392,7 @@ Use template literals to render the image jsx tag
 								className="details-image"
 								src={require(`../assets/${films.cover}.jpeg`)}
 							/>
-```							
+```
 
 Check the deconstructed props are rendering
 
@@ -429,7 +417,6 @@ Run another conditional render for a page loading message
 					<h2>Please wait this page is still loading</h2>
 				</div>
 ```
-
 
 9. At this stage the parent component (details should look like this)
 
@@ -499,7 +486,7 @@ export default class ScandiFilmDetails extends Component {
 
 Check to see if the error method works in the console, write it incorrectly to catch error as well, you should see the data pulling from the api-filmsData in the network tab. You can now delete the commented out code.
 
-10. As this is the parent page you need to look at all the children rendering correctly as well.  The component which is mapping through the array of objects needs to changed to a stateful component. Here state is an array, to show the difference between state as an object and state as an array, I have renamed the array as ```filmsBackend[]``` in the map functions ensure props have both a key and an id to meet the React jsx syntax requirements. Deconstruct state ```	let films = this.state.filmsBackend;``` so that films when passed as a prop is named consistently.
+10. As this is the parent page you need to look at all the children rendering correctly as well. The component which is mapping through the array of objects needs to changed to a stateful component. Here state is an array, to show the difference between state as an object and state as an array, I have renamed the array as `filmsBackend[]` in the map functions ensure props have both a key and an id to meet the React jsx syntax requirements. Deconstruct state `let films = this.state.filmsBackend;` so that films when passed as a prop is named consistently.
 
 ```
 import React, { Component } from 'react';
@@ -546,6 +533,7 @@ export default class FilmCatalogGallery extends Component {
 	}
 }
 ```
+
 Ensure that the child of the page renders props correctly - especially images with template literals and the file path
 
 ```
@@ -567,18 +555,19 @@ function FilmCatalog({ id, cover, description }) {
 export default FilmCatalog;
 
 ```
-#### Challenge -23 enable the backend server for deploy 
+
+#### Challenge -23 enable the backend server for deploy
 
 Once you can see the component rendering in the way it is you can remove the commented out code and link the back-end data and the front-end rendering of the data. I think this challenge should be 26 coming after you understand the complex network of imports, stateful components, passing props down to child components and the React data flows from the backend node module, via express into the stateful components and then into the functional components.
 
-Since there are several components this is the time that the app will break as the data is no longer 
+Since there are several components this is the time that the app will break as the data is no longer
 linking from the front end files but need to be fetched and rendered from the backend node environment. Therefore rather that run this challenge at 23 when the app breaks and you waste significant amount of time figuring out the confusing maze of React components. I think it is useful to run the build and deploy environment only at this stage.
 
 As a pre-deploy you need to run [yarn run build] to set up a build all packages file path to deploy to heroku. Add an env. file. [yarn add .env] and the proxy server should be joined as one file for heroku
 
 Create a proxy connection and ensure you have added it to your package-json (under the scripts section - it is not part of dev dependencies or scripts) like so:-
 
-```	},
+```},
 	"proxy": "http://localhost:3001",
 	"eslintConfig": {
 		"extends": "react-app"
@@ -608,7 +597,7 @@ const getFilmData = require('./api-filmsData');
 app.get('/api/films-data', (req, res) => res.send(getFilmData()));
 // once the run build is run in public files are created in build, the static files are joined to this file
 app.use(express.static(path.join(__dirname, '../../build')));
-// gets the static css and javascript files and sends them to the root - index.html  
+// gets the static css and javascript files and sends them to the root - index.html
 app.get('*', function(req, res) {
 	res.sendFile(path.join(__dirname, '../../build', 'index.html'));
 });
@@ -667,6 +656,7 @@ So check your package JSOn at this stage it should look like this
 	}
 }
 ```
+
 You are now ready to deploy OR set up the MongoDb database - challenge 26
 
 #### Challenge -26 MongoDb set up
@@ -675,28 +665,31 @@ If you don't have Homebrew, install it - steps to install HomeBrew. Homebrew is 
 Packages are bundles of source code distributed by developers of software, which can be compiled and installed on your machine.
 
 1. Copy and paste the following command into the terminal, then hit enter
-  ```
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  ```
+
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
 2. Press `enter` at the prompt, and enter your password.
 3. Once installation has finished type `brew doctor`. It should say `Your system is ready to brew.` If not inform one of your instructors.
 4. Update Homebrew: `brew update`
 
 <br>
 
-You are now ready to install mongo with Node. It's a non-relational (noSQL) database. 
+You are now ready to install mongo with Node. It's a non-relational (noSQL) database.
 Install the community version the steps recommend installing it with homebrew
 If you get stuck documentation [https://www.mongodb.com/download-center/community]
 
 Install it with `homebrew`:
 
-``` sh
+```sh
 brew install mongodb
 ```
+
 The program is saved by default in the file path /usr/local/var/mongodb
 Run the following command to ensure you have a place for mongo to store the data for your databases:
 
-``` sh
+```sh
 sudo mkdir -p /data/db && sudo chown -R $(whoami)/data/db
 note: whoamI is not a place holder it finds you from your users directory
 
@@ -706,6 +699,7 @@ sudo mongod --dbpath /Users/your_name_placeholder/data/db
 note: here Users is casesensitive and your name is a placeholder
 
 ```
+
 To check everything is working type `mongod` in the terminal. It will print a lot of stuff on the screen. After a few moments you should see this line at the bottom:
 
 ```
@@ -719,15 +713,16 @@ Here are some Catalina installation challenges - questions answered
 Here is a reddit thread
 [https://www.reddit.com/r/mongodb/comments/d7takd/macos_x_catalina_105_beta_and_mongo_a_warning/]
 
-
 Now that you have your database up and running - create a Db for Kodflix.
 
 In the terminal [use dbName]
 You will get a prompt [switched to dbName] - the name of the db yo uhave just created
 In terminal now initialise your db as the user using this command
+
 ```
 db.createUser({ user: 'dbName', pwd: 'dbName', roles: [ "readWrite", "dbAdmin" ] })
 ```
+
 You have now created yourself as the new user of this db.
 
 To visualise the data download Robot3T now called RoboMongo, Studio3T is free for 30 days, while Robot3T is free forever
@@ -735,14 +730,13 @@ To visualise the data download Robot3T now called RoboMongo, Studio3T is free fo
 Once downloaded you will find your Db in Robot 3T
 
 Go to File -> Connect... and then click on Create (this is at the top of the tool bar not at the bottom as a button do not click connect)
-Once you click create - On the first tab (Connection) just type the name of the connection. That's not important, but, for consistency reasons, let's call it kodflix. Leave everything else default. On the second tab(Authentication)  enable perform authentication and type kodflix -tick the box and use kodflix as the username, password once again for consistency. Click the button test the modal should show the port and authentication working. Now save your db is connected.
-
+Once you click create - On the first tab (Connection) just type the name of the connection. That's not important, but, for consistency reasons, let's call it kodflix. Leave everything else default. On the second tab(Authentication) enable perform authentication and type kodflix -tick the box and use kodflix as the username, password once again for consistency. Click the button test the modal should show the port and authentication working. Now save your db is connected.
 
 #### Challenge -27 MongoDb creating a collection of data
 
-First, let's create a new collection, which is the equivalent of a table in the classic relational database world. We'll have collection for each type of data. For now, just create a new collection called shows in robot3T by right clicking the connections tab and click create button. 
+First, let's create a new collection, which is the equivalent of a table in the classic relational database world. We'll have collection for each type of data. For now, just create a new collection called shows in robot3T by right clicking the connections tab and click create button.
 
-Let's add some TV shows. Each entry of the collection is called a a document. As we had 6 films registered, we'll add 6 documents. Right click on the shows document you have created. Go to insert data - look at the prompt we receive an empty object, click on the validate button. It's asking us to enter a valid JSON object. 
+Let's add some TV shows. Each entry of the collection is called a a document. As we had 6 films registered, we'll add 6 documents. Right click on the shows document you have created. Go to insert data - look at the prompt we receive an empty object, click on the validate button. It's asking us to enter a valid JSON object.
 
 On our backend side, we were already storing an array of JSON object, to this is as simply as copying & pasting each of them into individual documents or instead of manually copy-pasting each tv show, you can do following:
 
@@ -752,8 +746,9 @@ Run this command: mongoimport --db kodflix --collection shows --type json --file
 All your shows will be imported into shows collection of kodflix database.
 
 The danger is you do not have an option to individually validate each so it is better to manually validate each record.
-#### Challenge -28 MongoDb 
-READ[https://www.w3schools.com/nodejs/nodejs_mongodb_find.asp]
-[http://mongodb.github.io/node-mongodb-native/3.2/tutorials/connect/]
+
+#### Challenge -28 MongoDb
+
+READ[https://www.w3schools.com/nodejs/nodejs_mongodb_find.asp][http://mongodb.github.io/node-mongodb-native/3.2/tutorials/connect/]
 Understanding how assert works [https://stackoverflow.com/questions/28129223/node-js-assert-module-in-mongodb-driver-documentation]
 Understanding the syntax and call back function within MongoDB [https://mongodb.github.io/node-mongodb-native/api-generated/mongoclient.html]
